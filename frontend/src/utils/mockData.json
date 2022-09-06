@@ -1,0 +1,105 @@
+{
+    "top12": [
+        {
+            "id": 1,
+            "name": "Campagna 1",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Campagna 2",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Campagna 3",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Campagna 4",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 5,
+            "name": "Campagna 5",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Campagna 6",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 7,
+            "name": "Campagna 7",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 8,
+            "name": "Campagna 8",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 9,
+            "name": "Campagna 9",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 10,
+            "name": "Campagna 10",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 11,
+            "name": "Campagna 11",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        },
+        {
+            "id": 12,
+            "name": "Campagna 12",
+            "fondiRaccolti": 50,
+            "fondiTotali": 200,
+            "dataFine": "23-12-2022",
+            "image": "/img/prototipo_auto.jpg"
+        }
+    ],
+    "stats": {
+        "campagneCompletate": 20,
+        "totaleAlgoRaccolti": 241123,
+        "campagneTotali": 60
+    }
+}
