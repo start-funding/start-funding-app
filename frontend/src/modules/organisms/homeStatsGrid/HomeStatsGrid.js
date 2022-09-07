@@ -1,5 +1,6 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
+import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
 
 export default function HomeStatsGrid(props) {
     console.log(props)

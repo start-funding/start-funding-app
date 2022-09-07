@@ -1,5 +1,7 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
+import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
+import SiteTitle from "../../atoms/siteTitle/SiteTitle";
 
 export default function HomeTitleGrid(props) {
     return (
@@ -7,9 +9,7 @@ export default function HomeTitleGrid(props) {
             <Grid item xl={6} >
                 <Card style={{ border: "none", boxShadow: "none" }}>
                     <CardContent>
-                        <Typography variant="h2" align="center">
-                            START FUNDING
-                        </Typography>
+                        <SiteTitle title="start funding" />
                         <Typography align="center">
                             The new Algorand based crowdfunding platform
                         </Typography>
