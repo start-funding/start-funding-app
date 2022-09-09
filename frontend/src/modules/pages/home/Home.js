@@ -13,18 +13,18 @@ export default function Home() {
         <div>
             <GridSpacer height="5vh" />
 
-            {/* Sezione titolo */}
+            {/* Title section */}
             <HomeTitleGrid />
 
             <GridSpacer height="5vh" />
 
-            {/* Sezione griglia statistiche */}
+            {/* Section stats grid */}
             <HomeStatsGrid stats={Data.stats} />
 
             <GridSpacer height="10vh" />
             
-            {/* Sezione griglia top 12 campagne */}
-            <HomeTop12Grid campagne={Data.top12 } />
+            {/* Section top 12 campaign */}
+            <HomeTop12Grid campaigns={Data.top12} />
 
             <GridSpacer height="20vh" />
         </div>

@@ -1,6 +1,5 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
-import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
 
 export default function HomeStatsGrid(props) {
     console.log(props)
@@ -13,7 +12,7 @@ export default function HomeStatsGrid(props) {
                                 {props.stats.campagneCompletate}
                             </Typography>
                             <Typography align="center">
-                                campagne completate
+                                completed campaigns
                             </Typography>
                         </CardContent>
                     </Card>
@@ -25,7 +24,7 @@ export default function HomeStatsGrid(props) {
                                 {props.stats.totaleAlgoRaccolti}
                             </Typography>
                             <Typography align="center">
-                                Algo raccolti
+                                Algos collected
                             </Typography>
                         </CardContent>
                     </Card>
@@ -37,7 +36,7 @@ export default function HomeStatsGrid(props) {
                                 {props.stats.campagneTotali}
                             </Typography>
                             <Typography align="center">
-                                campagne totali
+                                total campaigns
                             </Typography>
                         </CardContent>
                     </Card>

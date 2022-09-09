@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } f
 import React from "react";
 import { Link as NavLink } from "react-router-dom";
 
-export default function AnteprimaCampagna(props) {
+export default function CampaignOverview(props) {
 
     return(
         <Grid item xl={4} style={{minWidth:"30%"}}>
@@ -10,22 +10,22 @@ export default function AnteprimaCampagna(props) {
                 <CardMedia
                     component="img"
                     height="200"
-                    image={props.campagna.image}
+                    image={props.campaign.image}
                     alt="green iguana"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {props.campagna.name}
+                        {props.campaign.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {props.campagna.fondiRaccolti} / {props.campagna.fondiTotali}
+                        {props.campaign.collectedFounds} / {props.campaign.target}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {props.campagna.dataFine}
+                        {props.campaign.endingDate}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" component={NavLink} to={`campagna/${props.campagna.id}`}  className="link nav-link-desktop">
+                    <Button size="small" component={NavLink} to={`campaign/${props.campaign.id}`}  className="link nav-link-desktop">
                         Learn More
                     </Button>
                 </CardActions>

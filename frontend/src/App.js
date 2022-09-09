@@ -6,9 +6,10 @@ import {
   Route
 } from "react-router-dom";
 import Home from './modules/pages/home/Home';
-import Campagna from './modules/pages/campagna/Campagna';
-import Campagne from './modules/pages/campagne/Campagne';
-import CreaCampagna from './modules/pages/creacampagna/CreaCampagna';
+import CreateCampaign from './modules/pages/createCampaign/CreateCampaign';
+import Campaigns from './modules/pages/campaigns/Campaigns';
+import Campaign from './modules/pages/campaign/Campaign';
+
 
 function App() {
   return (
@@ -20,9 +21,9 @@ function App() {
         {/* Central content */}
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/creacampagna" element={<CreaCampagna />} />
-          <Route path="/campagna/:id" element={<Campagna />} />
-          <Route path="/campagne" element={<Campagne />} />
+          <Route path="/createcampaign" element={<CreateCampaign />} />
+          <Route path="/campaign/:id" element={<Campaign />} />
+          <Route path="/campaigns" element={<Campaigns />} />
         </Routes>
 
         {/* Footer */}

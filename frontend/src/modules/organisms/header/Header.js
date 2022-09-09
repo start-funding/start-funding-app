@@ -9,8 +9,8 @@ import HeaderMobileMenu from "../../molecules/headerMobileMenu/HeaderMobileMenu"
 
 let navigationLinks = [
   { name: "HOME", href: "/", active: true },
-  { name: "CREA CAMPAGNA", href: "/creacampagna", active: false },
-  { name: "CAMPAGNE", href: "/campagne", active: false }
+  { name: "CREATE CAMPAIGN", href: "/createcampaign", active: false },
+  { name: "CAMPAIGNS", href: "/campaigns", active: false }
 ];
 
 
