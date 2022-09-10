@@ -3,7 +3,14 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+// To handle parameters from x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// To handle parameters from test cases
+app.use(express.json());
+
 const Campaign = require('./models/Campaign.js');
+const campaignController = require('./controllers/campaignController');
 
 app.listen(PORT, (error) => {
     if (!error)
@@ -31,24 +38,4 @@ app.get('/campaigns', (req, res) => {
     res.status(200).json(campaigns);
 });
 
-app.use(express.urlencoded({ extended: true }));
-
-app.post('/campaigns', (req, res) => {
-    // TODO: add validation to params
-    new_campaign = new Campaign({
-        title: req.body.title,
-        description: req.body.description,
-        img: req.body.img,
-        min_algo: req.body.min_algo,
-        obj_algo: req.body.obj_algo,
-        state: req.body.state,
-        date_start: req.body.date_start,
-        date_end: req.body.date_end,
-    });
-
-    // TODO: save new campaign inside db
-
-    res.status(201).json({
-        message: "Campaign " + new_campaign.id + " created successfully!"
-    });
-});
+app.post('/campaigns', campaignController.create);
