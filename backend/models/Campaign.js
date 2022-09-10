@@ -1,25 +1,36 @@
-const { v4: uuidv4 } = require('uuid');
 class Campaign {
+    static count = 0;
 
     constructor(
+        owner = "",
         title = "", description = "", img = "",
-        min_algo = -1, obj_algo = -1,
-        state = false,
-        date_start = -1, date_end = -1, created = new Date) {
+        targetAlgo = -1,
+        state = "deactivated",
+        endingDate = -1) {
 
-        this.id = uuidv4();
+        this.id = ++this.constructor.count;
+        this.owner = owner;
+
         this.title = title;
         this.description = description;
         this.img = img;
 
-        this.min_algo = min_algo;
-        this.obj_algo = obj_algo;
+        this.collectedAlgo = 0;
+        this.targetAlgo = targetAlgo;
+        this.totalDonators = 0;
 
         this.state = state;
 
-        this.date_start = date_start;
-        this.date_end = date_end;
-        this.created = created;
+        this.endingDate = endingDate;
+        this.created = new Date;
+    }
+
+    set setTotalDonators(totalDonators) {
+        this.totalDonators = totalDonators;
+    }
+
+    incrementTotalDonators() {
+        this.totalDonators = ++this.totalDonators;
     }
 }
 
