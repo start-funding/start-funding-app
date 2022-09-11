@@ -1,6 +1,5 @@
+const { v4: uuidv4 } = require('uuid')
 class Campaign {
-    static count = 0;
-
     constructor(
         owner = "",
         title = "", description = "", img = "",
@@ -8,7 +7,7 @@ class Campaign {
         state = "deactivated",
         endingDate = -1) {
 
-        this.id = ++this.constructor.count;
+        this.id = uuidv4();
         this.owner = owner;
 
         this.title = title;
@@ -23,6 +22,10 @@ class Campaign {
 
         this.endingDate = endingDate;
         this.created = new Date;
+    }
+
+    get getId() {
+        return this.id;
     }
 
     set setTotalDonators(totalDonators) {
