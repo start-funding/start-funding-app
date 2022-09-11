@@ -19,23 +19,7 @@ app.listen(PORT, (error) => {
         console.log("Error occurred, server can't start", error);
 });
 
-app.get('/campaigns', (req, res) => {
-    // Preparing example data
-    const today = new Date();
-    const tomorrow = new Date(today);
-    const nextWeek = new Date(today);
-
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    nextWeek.setDate(nextWeek.getDate() + 7);
-
-    // TODO: Fetch data from db
-
-    const campaigns = [];
-    campaigns.push(new Campaign("test1", "description1", "img1", 1, 100, 10, false, tomorrow, nextWeek));
-    campaigns.push(new Campaign("test2", "description2", "img2", 2, 200, false, tomorrow, nextWeek));
-    campaigns.push(new Campaign("test3", "description3", "img3", 3, 300, true, tomorrow, nextWeek));
-
-    res.status(200).json(campaigns);
-});
-
+app.get('/campaigns', campaignController.getAll);
 app.post('/campaigns', campaignController.create);
+
+app.get('/campaign/:id', campaignController.get);
