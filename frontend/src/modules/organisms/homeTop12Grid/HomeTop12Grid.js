@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
-import CampaignOverview from "../../molecules/campaignOverview/CampaignOverview";
+import CampaignOverviewGrid from "../../molecules/campaignOverviewGrid/CampaignOverviewGrid";
 
 export default function HomeTop12Grid(props) {
     return (
@@ -11,13 +11,9 @@ export default function HomeTop12Grid(props) {
                     Top 12 campaigns:
                 </Typography>
                 <GridSpacer height="1%" />
-                <Grid container spacing={5} id="top-12-grid" justifyContent="space-between">
-                    {props.campaigns.map(campaign => {
-                        return (
-                            <CampaignOverview key={campaign.id} campaign={campaign} />
-                        )
-                    })}
-                </Grid>
+                <CampaignOverviewGrid
+                    campaigns={props.campaigns}
+                />
             </Grid>
         </Grid>
     )

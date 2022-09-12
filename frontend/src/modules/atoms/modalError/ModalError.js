@@ -1,7 +1,13 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function ModalError(props) {
+    
+    const handleCloseModal = () => {
+        console.log("dentro")
+        props.setOpen(false)
+    };
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -17,7 +23,7 @@ export default function ModalError(props) {
     return (
         <Modal
             open={props.open}
-            onClose={props.handleCloseModal}
+            onClose={handleCloseModal}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >

@@ -12,10 +12,7 @@ export default function SaveCampaignButton(props) {
     const [open, setOpen] = useState(false);
     const [modalErrorText, setModalErrorText] = useState("");
     const handleOpenModal = () => setOpen(true);
-    const handleCloseModal = () => {
-        console.log("chiudo modal")
-        setOpen(false)
-    };
+
 
 
     function saveCampaign() {
@@ -92,9 +89,11 @@ export default function SaveCampaignButton(props) {
         }
     }
     return (
-        <Button variant="contained" component="label" onClick={saveCampaign}>
-            Save
-            <ModalError open={open} handleCloseModal={handleCloseModal} modalErrorText={modalErrorText} />
-        </Button>
+        <div>
+            <Button variant="contained" component="label" onClick={saveCampaign}>
+                Save
+            </Button>
+            <ModalError open={open} setOpen={setOpen} modalErrorText={modalErrorText} />
+        </div>
     )
 }

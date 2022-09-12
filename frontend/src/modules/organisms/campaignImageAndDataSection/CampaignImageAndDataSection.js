@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardMedia, Grid, LinearProgress, Typography } from "@mui/material";
+import { Box, Button, Card, CardActionArea, CardMedia, Grid, LinearProgress, Typography } from "@mui/material";
 import React from "react";
 import CampaignImageUpload from "../../molecules/campaignImageUpload/CampaignImageUpload";
 import CampaignNameInput from "../../atoms/campaignNameInput/CampaignNameInput";
@@ -129,6 +129,16 @@ export default function CampaignImageAndDataSection(props) {
                                     Campaign closes on {props.campaign.endingDate}
                                 </Typography>
                     }
+
+                        {
+                            props.createCampaignPage ?
+                                <span></span>
+                            :
+                                props.editing || props.campaign.owner === props.userAddress || props.campaign.state != "active" ?
+                                    <span></span>
+                                :
+                                    <Button variant="contained">Make contribution</Button>
+                        }
                 </Card>
             </Grid>
         </Grid>

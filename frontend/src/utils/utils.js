@@ -11,6 +11,10 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+function newDateFromMonthDayYear(dateString) {
+    return new Date(`${dateString.split("-")[2]}-${dateString.split("-")[1]}-${dateString.split("-")[0]}`);
+}
 
 module.exports.dateFormatter = dateFormatter;
 module.exports.getRandomInt = getRandomInt;
+module.exports.newDateFromMonthDayYear = newDateFromMonthDayYear;
