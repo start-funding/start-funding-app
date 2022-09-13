@@ -6,7 +6,7 @@ import CampaignDescriptionSection from "../../organisms/campaignDescriptionSecti
 import CampaignImageAndDataSection from "../../organisms/campaignImageAndDataSection/CampaignImageAndDataSection";
 import './createCampaign.scss'
 
-export default function CreateCampaign() {
+export default function CreateCampaign(props) {
 
     // Form inputs
     const [file, setFile] = useState(null);
@@ -34,6 +34,7 @@ export default function CreateCampaign() {
             <CampaignTopButtonsBar 
                 campaignToSave={campaign}
                 createCampaignPage={true}
+                updateNavActive={props.updateNavActive}
             />
             <GridSpacer 
                 height="5vh" 

@@ -17,7 +17,7 @@ export default function CampaignTopButtonsBar(props) {
             <Grid container spacing={2} justifyContent="center" style={{ paddingLeft: "5%", paddingRight: "5%" }}>
                 <Grid item xl={12} style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
                     {/* Arrow back button*/}
-                    <ArrowBackButton />
+                    <ArrowBackButton updateNavActive={props.updateNavActive}/>
 
                     {/* Save button */}
                     <SaveCampaignButton campaign={props.campaignToSave} update={false} setEditing={props.setEditing} />
@@ -47,7 +47,7 @@ export default function CampaignTopButtonsBar(props) {
                     <Grid container spacing={2} justifyContent="center" style={{ paddingLeft: "5%", paddingRight: "5%" }}>
                         <Grid item xl={12} style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
                             {/* Arrow back button*/}
-                            <ArrowBackButton />
+                            <ArrowBackButton updateNavActive={props.updateNavActive} />
 
                             {/* Edit button */}
                             <Button variant="contained" component="label" onClick={handleEdit} className="editButton" >
@@ -62,7 +62,7 @@ export default function CampaignTopButtonsBar(props) {
                 <Grid container spacing={2} justifyContent="center" style={{ paddingLeft: "5%", paddingRight: "5%" }}>
                         <Grid item xl={12} style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
                             {/* Arrow back button*/}
-                            <ArrowBackButton />
+                            <ArrowBackButton updateNavActive={props.updateNavActive} />
 
                             
                         </Grid>

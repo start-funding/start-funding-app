@@ -6,8 +6,12 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import './arrowBackButton.scss'
 
 export default function ArrowBackButton(props) {
+    function handleCampaignClick() {
+        props.updateNavActive('HOME');
+    }
+
     return (
-        <Link to="/" >
+        <Link to="/" onClick={handleCampaignClick}>
             <IconButton color="primary" component="label" className="arrowBack">
                 <ArrowBackIosIcon />
             </IconButton>

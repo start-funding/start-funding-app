@@ -7,7 +7,11 @@ export default function CampaignOverviewGrid(props) {
         <Grid container spacing={5} id="top-12-grid" justifyContent="space-between" style={{paddingLeft:"8%", paddingRight:"8%"}}>
             {props.campaigns.map(campaign => {
                 return (
-                    <CampaignOverview key={campaign.id} campaign={campaign} />
+                    <CampaignOverview 
+                        key={campaign.id} 
+                        campaign={campaign} 
+                        updateNavActive={props.updateNavActive} 
+                    />
                 )
             })}
         </Grid>

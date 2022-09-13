@@ -3,7 +3,10 @@ import React from "react";
 import { Link as NavLink } from "react-router-dom";
 
 export default function CampaignOverview(props) {
-
+    function handleCampaignClick() {
+        props.updateNavActive('CAMPAIGN');
+    }
+    
     return(
         <Grid item xs={12} sm={6} lg={4} style={{minWidth:"30%"}}>
             <Card>
@@ -25,7 +28,7 @@ export default function CampaignOverview(props) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" component={NavLink} to={`/campaign/${props.campaign.id}`}  className="link nav-link-desktop">
+                    <Button size="small" onClick={handleCampaignClick} component={NavLink} to={`/campaign/${props.campaign.id}`}  className="link nav-link-desktop">
                         Learn More
                     </Button>
                 </CardActions>

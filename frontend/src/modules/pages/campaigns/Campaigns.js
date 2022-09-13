@@ -6,7 +6,7 @@ import CampaignsFilterSection from "../../organisms/campaignsFiltersSection/Camp
 import CampaignsResultsSection from "../../organisms/campaignsResultsSection/CampaignsResultsSection";
 import CampaingsPaginationSection from "../../organisms/campaignsPaginationSection/CampaignsPaginationSection";
 
-export default function Campaigns() {
+export default function Campaigns(props) {
 
     // Campaigns
     const [campaigns, setCampaigns] = useState([]);
@@ -123,6 +123,7 @@ export default function Campaigns() {
             {/* Search results section */}
             <CampaignsResultsSection
                 campaigns={campaigns}
+                updateNavActive={props.updateNavActive}
             />
 
             <GridSpacer

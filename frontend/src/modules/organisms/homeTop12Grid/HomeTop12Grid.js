@@ -12,6 +12,7 @@ export default function HomeTop12Grid(props) {
                 </Typography>
                 <GridSpacer height="1%" />
                 <CampaignOverviewGrid
+                    updateNavActive={props.updateNavActive}
                     campaigns={props.campaigns}
                 />
             </Grid>

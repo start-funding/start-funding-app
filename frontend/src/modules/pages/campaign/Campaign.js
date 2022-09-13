@@ -10,7 +10,7 @@ import CampaignDescriptionSection from "../../organisms/campaignDescriptionSecti
 
 import MockData from '../../../utils/mockData.json';
 
-export default function Campaign() {
+export default function Campaign(props) {
     // Form inputs
     const [file, setFile] = useState(null);
     const [campaignName, setCampaignName] = useState("");
@@ -36,10 +36,8 @@ export default function Campaign() {
             // Recupero dati campagna da axios
             let fetchedCampaign = MockData.top12.filter(campaign => campaign.id === parseInt(id))[0];
 
-    
             // Setto lo stato
             setCampaign(fetchedCampaign)
-
         })();
     }, []);
 
@@ -59,6 +57,7 @@ export default function Campaign() {
                 setEditing={setEditing}
                 createCampaignPage={false}
                 userAddress={userAddress}
+                updateNavActive={props.updateNavActive}
             />
             <GridSpacer 
                 height="5vh" 

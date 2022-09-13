@@ -8,7 +8,7 @@ import HomeTop12Grid from "../../organisms/homeTop12Grid/HomeTop12Grid";
 import Data from '../../../utils/mockData.json';
 import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
 
-export default function Home() {
+export default function Home(props) {
     return(
         <div>
             <GridSpacer height="5vh" />
@@ -24,7 +24,10 @@ export default function Home() {
             <GridSpacer height="10vh" />
             
             {/* Section top 12 campaign */}
-            <HomeTop12Grid campaigns={Data.top12} />
+            <HomeTop12Grid 
+                campaigns={Data.top12} 
+                updateNavActive={props.updateNavActive}
+            />
 
             <GridSpacer height="20vh" />
         </div>

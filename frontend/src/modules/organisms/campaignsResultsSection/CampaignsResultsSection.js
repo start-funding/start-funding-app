@@ -5,6 +5,7 @@ export default function CampaignsResultsSection(props) {
     return (
         <CampaignOverviewGrid 
             campaigns={props.campaigns}
+            updateNavActive={props.updateNavActive}
         />
     )
 }

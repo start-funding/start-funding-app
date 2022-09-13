@@ -6,7 +6,17 @@ export default function HeaderDesktopMenu(props) {
     return (
         <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block', xl: 'block' } }}>
             {props.navActive.map((item) => (
-                <HeaderMenuButton navActive={props.navActive} setNavActive={props.setNavActive} navigationLinks={props.navigationLinks} item={item} key={item.name} />
+                item.show ?
+                   <HeaderMenuButton 
+                        navActive={props.navActive} 
+                        setNavActive={props.setNavActive} 
+                        navigationLinks={props.navigationLinks}
+                        updateNavActive={props.updateNavActive}
+                        item={item} 
+                        key={item.name}
+                    />
+                :
+                    <span key={item.name}></span>
             ))}
         </Box>
     )
