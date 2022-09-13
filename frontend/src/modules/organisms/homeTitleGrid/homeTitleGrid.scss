@@ -1,0 +1,6 @@
+@import '../../../generalStyles/variables.scss';
+
+.siteDescription {
+    @extend .custom-h3;
+    font-weight: 100;
+}

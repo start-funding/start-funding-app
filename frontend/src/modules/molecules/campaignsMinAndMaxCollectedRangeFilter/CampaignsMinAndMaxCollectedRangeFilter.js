@@ -3,7 +3,7 @@ import CampaignsCollectedRangeFilter from "../../atoms/campaignsCollectedRangeFi
 
 export default function CampaignsMinAndMaxCollectedRangeFilter(props) {
     return (
-        <div>
+        <div style={{display: "flex", gap: "4vw"}}>
             <CampaignsCollectedRangeFilter
                 label={"Min"}
                 placeholder={"Min. collected range"}

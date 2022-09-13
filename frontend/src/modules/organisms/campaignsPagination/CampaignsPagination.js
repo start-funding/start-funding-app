@@ -19,6 +19,7 @@ export default function CampaignsPagination(props) {
                 page={props.pageNumber}
                 onChange={handlePageChange}
             />
+            
             <InputLabel id="total-results-label">{props.totalResults} results</InputLabel>
 
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -30,9 +31,9 @@ export default function CampaignsPagination(props) {
                     onChange={handleResultsPerPageChange}
                     label="Results per page"
                 >
-                    <MenuItem value="2">2</MenuItem>
-                    <MenuItem value="4">4</MenuItem>
-                    <MenuItem value="7">7</MenuItem>
+                    <MenuItem value="10">10</MenuItem>
+                    <MenuItem value="20">20</MenuItem>
+                    <MenuItem value="50">50</MenuItem>
                 </Select>
             </FormControl>
         </Grid>

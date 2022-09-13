@@ -7,13 +7,13 @@ import CampaignsResultsSection from "../../organisms/campaignsResultsSection/Cam
 import CampaingsPaginationSection from "../../organisms/campaignsPaginationSection/CampaignsPaginationSection";
 
 export default function Campaigns() {
-    
+
     // Campaigns
     const [campaigns, setCampaigns] = useState([]);
-    
+
     // Pagination
     const [pageNumber, setPageNumber] = useState(1);
-    const [resultsPerPage, setResultsPerPage] = useState(2);
+    const [resultsPerPage, setResultsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState();
     const [totalResults, setTotalResults] = useState(0);
 
@@ -23,7 +23,7 @@ export default function Campaigns() {
     const [minCollectedRange, setMinCollectedRange] = useState("")
     const [maxCollectedRange, setMaxCollectedRange] = useState("")
     const [state, setState] = useState("");
-    
+
     useEffect(() => {
         searchCampaigns();
     }, [minCollectedRange, maxCollectedRange, campaignName, campaignEndingDate, state, pageNumber, resultsPerPage, totalPages]);
@@ -103,7 +103,7 @@ export default function Campaigns() {
             />
 
             {/* Filters section */}
-            <CampaignsFilterSection 
+            <CampaignsFilterSection
                 campaignName={campaignName}
                 setCampaignName={setCampaignName}
                 campaignEndingDate={campaignEndingDate}
@@ -116,15 +116,6 @@ export default function Campaigns() {
                 setState={setState}
             />
 
-            {/* PAGINATION */}
-             <CampaingsPaginationSection 
-                setPageNumber={setPageNumber}
-                setResultsPerPage={setResultsPerPage}
-                totalPages={totalPages}
-                pageNumber={pageNumber}
-                totalResults={totalResults}
-                resultsPerPage={resultsPerPage}
-            /> 
             <GridSpacer
                 height="5vh"
             />
@@ -132,6 +123,24 @@ export default function Campaigns() {
             {/* Search results section */}
             <CampaignsResultsSection
                 campaigns={campaigns}
+            />
+
+            <GridSpacer
+                height="5vh"
+            />
+
+            {/* PAGINATION */}
+            <CampaingsPaginationSection
+                setPageNumber={setPageNumber}
+                setResultsPerPage={setResultsPerPage}
+                totalPages={totalPages}
+                pageNumber={pageNumber}
+                totalResults={totalResults}
+                resultsPerPage={resultsPerPage}
+            />
+
+            <GridSpacer
+                height="5vh"
             />
         </div>
     )

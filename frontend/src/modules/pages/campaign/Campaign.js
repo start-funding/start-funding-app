@@ -78,6 +78,7 @@ export default function Campaign() {
                 editing={editing}
                 campaign={campaign}
             />
+            
             <GridSpacer 
                 height="2vh" 
             />

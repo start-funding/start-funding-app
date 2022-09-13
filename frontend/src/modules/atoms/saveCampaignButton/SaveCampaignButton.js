@@ -1,5 +1,4 @@
-import { Button, Modal, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Button } from "@mui/material";
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dateFormatter, getRandomInt } from "../../../utils/utils";
@@ -90,7 +89,7 @@ export default function SaveCampaignButton(props) {
     }
     return (
         <div>
-            <Button variant="contained" component="label" onClick={saveCampaign}>
+            <Button variant="contained" className="saveButton" component="label" onClick={saveCampaign}>
                 Save
             </Button>
             <ModalError open={open} setOpen={setOpen} modalErrorText={modalErrorText} />

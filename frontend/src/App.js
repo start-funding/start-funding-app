@@ -10,6 +10,7 @@ import CreateCampaign from './modules/pages/createCampaign/CreateCampaign';
 import Campaigns from './modules/pages/campaigns/Campaigns';
 import Campaign from './modules/pages/campaign/Campaign';
 
+import './generalStyles/general.scss'
 
 function App() {
   return (

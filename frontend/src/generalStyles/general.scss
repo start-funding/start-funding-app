@@ -1,0 +1,33 @@
+@import './variables.scss';
+
+.saveButton {
+    background-color: $save-action!important;
+
+    &:hover {
+        background-color: $save-action-hover!important;
+    }
+}
+
+.editButton {
+    background-color: $edit-action!important;
+
+    &:hover {
+        background-color: $edit-action-hover!important;
+    }
+}
+
+.cancelButton {
+    background-color: $cancel-action!important;
+
+    &:hover {
+        background-color: $cancel-action-hover!important;
+    }
+}
+
+.actionButton {
+    background-color: $link-color!important;
+
+    &:hover {
+        background-color: $link-hover-color!important;
+    }
+}

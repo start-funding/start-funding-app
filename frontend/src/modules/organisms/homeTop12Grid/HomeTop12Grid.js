@@ -6,8 +6,8 @@ import CampaignOverviewGrid from "../../molecules/campaignOverviewGrid/CampaignO
 export default function HomeTop12Grid(props) {
     return (
         <Grid container spacing={2} id="home-grid-third-block">
-            <Grid item xl={12} style={{paddingLeft:"8%", paddingRight:"8%"}}>
-                <Typography variant="h5">
+            <Grid item xl={12} >
+                <Typography variant="h5" style={{paddingLeft: "8%"}}>
                     Top 12 campaigns:
                 </Typography>
                 <GridSpacer height="1%" />

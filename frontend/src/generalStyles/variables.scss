@@ -1,8 +1,31 @@
 // Colors
-$first-color: black;
-$second-color: #4cdc5d;
-$third-color: #4cdc5d;
+$first-color: #c53a3b;
+$second-color: black;
+$third-color: #9d0000;
 
-$link-color: rgb(29, 188, 228);
-$link-hover-color: rgb(77, 77, 245);
-$link-active-color: rgb(0, 7, 104);
+$link-color: #c53a3b;
+$link-hover-color: #760101;
+$link-active-color: black;
+
+$save-action: rgb(30, 162, 30);
+$save-action-hover: rgb(22, 120, 22);
+$edit-action: rgb(190, 157, 21);
+$edit-action-hover: rgb(118, 94, 2);
+$cancel-action: #8a8a8a;
+$cancel-action-hover: #4f4f4f;
+
+// Typography
+$primary-font: "Roboto";
+
+.custom-h1 {
+    color: $second-color;
+    font-family: $primary-font;
+    font-size: 4.5em;
+}
+
+.custom-h3 {
+    color: $second-color;
+    font-family: $primary-font;
+    font-size: 1.5em;
+    font-weight:normal!important;
+}

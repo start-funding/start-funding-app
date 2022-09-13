@@ -34,7 +34,7 @@ export default function CampaignTopButtonsBar(props) {
 
                             {/* Save button */}
                             <div style={{display:"flex", gap:"2em"}}>
-                                <Button variant="contained" component="label" onClick={handleCancel} >
+                                <Button variant="contained" component="label" onClick={handleCancel} className="cancelButton">
                                     Cancel
                                 </Button>
                                 <SaveCampaignButton campaign={props.campaignToSave} update={true} setEditing={props.setEditing} />
@@ -50,7 +50,7 @@ export default function CampaignTopButtonsBar(props) {
                             <ArrowBackButton />
 
                             {/* Edit button */}
-                            <Button variant="contained" component="label" onClick={handleEdit} >
+                            <Button variant="contained" component="label" onClick={handleEdit} className="editButton" >
                                 Edit
                             </Button>
                         </Grid>

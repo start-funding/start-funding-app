@@ -7,8 +7,8 @@ import CampaignEndingDateInput from "../../atoms/campaignEndingDateInput/Campaig
 
 export default function CampaignImageAndDataSection(props) {    
     return (
-        <Grid container spacing={2} style={{ paddingLeft: "10%", paddingRight: "10%", height: 350 }}>
-            <Grid item xl={6} style={{ width: "50%", height: "100%" }}>
+        <Grid container spacing={2} style={{ paddingLeft: "10%", paddingRight: "10%"  }}>
+            <Grid item xs={12} md={6} style={{ width: "50%", height: "100%", height: "60vh" }}>
                 {
                     props.createCampaignPage ?
                         <CampaignImageUpload 
@@ -37,7 +37,7 @@ export default function CampaignImageAndDataSection(props) {
 
                 }
             </Grid>
-            <Grid item xl={6} style={{ width: "50%", height: "100%" }}>
+            <Grid item  xs={12} md={6} style={{ width: "50%", height: "100%", height: "60vh" }}>
                 <Card style={{ width: "100%", padding: 10, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-around", height: "100%" }}>
 
                     {/* Campaign name input field */}
@@ -137,7 +137,7 @@ export default function CampaignImageAndDataSection(props) {
                                 props.editing || props.campaign.owner === props.userAddress || props.campaign.state != "active" ?
                                     <span></span>
                                 :
-                                    <Button variant="contained">Make contribution</Button>
+                                    <Button className="actionButton" variant="contained">Make contribution</Button>
                         }
                 </Card>
             </Grid>

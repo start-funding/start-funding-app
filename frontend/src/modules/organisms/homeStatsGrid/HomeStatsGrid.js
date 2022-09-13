@@ -1,11 +1,12 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import './homeStatsGrid.scss';
 
 export default function HomeStatsGrid(props) {
     console.log(props)
     return(
         <Grid container spacing={2} justifyContent="center" id="home-grid-second-block">
-                <Grid item xl={3} style={{minWidth:"20%"}}>
+                <Grid item xs={12} md={3} className="statsElement">
                     <Card>
                         <CardContent>
                             <Typography variant="h5"  align="center">
@@ -17,7 +18,7 @@ export default function HomeStatsGrid(props) {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xl={3} style={{minWidth:"20%"}}>
+                <Grid item xs={12} md={3} className="statsElement">
                     <Card>
                         <CardContent>
                             <Typography variant="h5"  align="center">
@@ -29,7 +30,7 @@ export default function HomeStatsGrid(props) {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xl={3} style={{minWidth:"20%"}} >
+                <Grid item xs={12} md={3} className="statsElement">
                     <Card>
                         <CardContent>
                             <Typography variant="h5"  align="center">
