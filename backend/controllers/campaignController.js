@@ -1,5 +1,6 @@
 const Campaign = require('../models/Campaign.js');
 const { db } = require('../firebase.js');
+const { FieldValue } = require('firebase-admin/firestore');
 
 const getAll = async(req, res) => {
     // Fetch data from db
@@ -98,4 +99,52 @@ const create = async(req, res) => {
     }
 };
 
-module.exports = { getAll, get, create };
+const fund = async(req, res) => {
+    try {
+        const id = req.params.id;
+        const amount = parseInt(req.body.amount);
+        const addressFrom = req.body.address;
+
+        const campaignRef = db.collection('campaigns').doc(`${id}`);
+
+        const oldCampaign = await campaignRef.get();
+        const oldTransactions = oldCampaign.data().transactions;
+
+        const newTransactions = oldTransactions;
+
+        let totalDonators = 0;
+
+        if (addressFrom in oldTransactions) {
+            newTransactions[addressFrom] += amount;
+        } else {
+            newTransactions[addressFrom] = amount;
+            totalDonators = 1;
+        }
+
+        const transactionsUpdate = await campaignRef.set({ transactions: newTransactions }, { merge: true });
+
+        const result = await campaignRef.update({
+            collectedAlgo: FieldValue.increment(amount),
+            totalDonators: FieldValue.increment(totalDonators),
+        });
+
+        const updatedCampaign = await campaignRef.get();
+
+        res.status(200).json({
+            message: "Campaign funded successfully!",
+            data: {
+                collectedAlgo: updatedCampaign.data().collectedAlgo,
+                totalDonators: updatedCampaign.data().totalDonators,
+                transactions: updatedCampaign.data().transactions
+            },
+            error: null
+        });
+    } catch (error) {
+        return res.status(500).json({
+            data: null,
+            error: error,
+        });
+    }
+};
+
+module.exports = { getAll, get, create, fund };
