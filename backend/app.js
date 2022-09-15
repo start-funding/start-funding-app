@@ -23,3 +23,4 @@ app.get('/campaigns', campaignController.getAll);
 app.post('/campaigns', campaignController.create);
 
 app.get('/campaign/:id', campaignController.get);
+app.post('/campaign/:id', campaignController.fund);
