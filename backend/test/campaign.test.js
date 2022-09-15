@@ -3,6 +3,23 @@ const Campaign = require("../models/Campaign.js");
 const baseURL = "http://localhost:3000";
 
 // const Campaign = require('../models/Campaign.js');
+const createNewCampaignRequest = async() => {
+    const newPost = {
+        owner: "dsaokpdasosapkdpaos",
+        title: "title",
+        description: "description",
+        img: "img",
+        targetAlgo: 100,
+        state: "active",
+        endingDate: new Date()
+    }
+
+    const response = await request(baseURL)
+        .post("/campaigns")
+        .send(newPost);
+
+    return response;
+}
 
 describe('Testing Campaign', () => {
     const Campaign = require('../models/Campaign.js');
@@ -76,19 +93,7 @@ describe('Testing Campaign', () => {
 
 describe('Testing Campaign API', () => {
     it(" POST /campaigns - store campaign", async() => {
-        const newPost = {
-            owner: "dsaokpdasosapkdpaos",
-            title: "title",
-            description: "description",
-            img: "img",
-            targetAlgo: 100,
-            state: "active",
-            endingDate: new Date()
-        }
-
-        const response = await request(baseURL)
-            .post("/campaigns")
-            .send(newPost);
+        const response = await createNewCampaignRequest();
 
         expect(response.statusCode).toBe(201);
         expect(response.body.message).toBe("Campaign created successfully!");
@@ -112,7 +117,6 @@ describe('Testing Campaign API', () => {
             .send(newPost);
 
         const id = responsePost.body.data.id;
-        console.log(id);
 
         const response = await request(baseURL)
             .get(`/campaign/${id}`);
@@ -128,5 +132,26 @@ describe('Testing Campaign API', () => {
 
         expect(response.statusCode).toBe(200);
         expect(response.body.data.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it(" POST /campaign/:id - fund specific campaign", async() => {
+        const responseNewCampaign = await createNewCampaignRequest();
+
+        const createdId = responseNewCampaign.body.data.id;
+        const oldCollectedAlgo = parseInt(responseNewCampaign.body.data.collectedAlgo);
+
+        expect(responseNewCampaign.statusCode).toBe(201);
+
+        const response = await request(baseURL)
+            .post(`/campaign/${createdId}`)
+            .send({ amount: 15 });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.message).toBe("Campaign funded successfully!");
+
+        expect(response.body.data.collectedAlgo).toBeGreaterThan(oldCollectedAlgo);
+
+        expect(response.body.data).not.toBeNull();
+        expect(response.body.error).toBeNull();
     });
 })
