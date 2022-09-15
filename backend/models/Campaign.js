@@ -18,6 +18,8 @@ class Campaign {
         this.targetAlgo = targetAlgo;
         this.totalDonators = 0;
 
+        this.transactions = {};
+
         this.state = state;
 
         this.endingDate = endingDate;
