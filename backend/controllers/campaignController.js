@@ -23,20 +23,22 @@ const getAll = async(req, res) => {
         data: result,
         error: null
     });
-}
+};
 
 const get = async(req, res) => {
     const id = req.params.id;
 
     try {
+        // TODO: Add regex validation for uuid
+
         // Fetch data from db
         const campaign = await db.collection('campaigns').doc(`${id}`).get();
 
         const result = campaign.data();
 
         if (!result) {
-            return res.status(500).json({
-                message: "No matching documents.",
+            return res.status(404).json({
+                message: "No matching campaigns.",
                 data: null,
                 error: null,
             });
@@ -48,13 +50,13 @@ const get = async(req, res) => {
             error: null
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(404).json({
             message: "No matching documents.",
             data: null,
             error: error,
         });
     }
-}
+};
 
 // Create function for post campaign route
 const create = async(req, res) => {
@@ -147,4 +149,34 @@ const fund = async(req, res) => {
     }
 };
 
-module.exports = { getAll, get, create, fund };
+const deleteCampaign = async(req, res) => {
+    const id = req.params.id;
+
+    const campaignRef = await db.collection('campaigns').doc(`${id}`);
+
+    campaignRef.get().then((doc) => {
+        if (doc.exists) {
+            campaignRef.delete();
+            return res.status(200).json({
+                message: "Campaign deleted successfully!",
+                data: {
+                    deleted: id
+                },
+                error: null
+            });
+        } else {
+            return res.status(404).json({
+                message: "No matching campaigns.",
+                data: null,
+                error: null
+            });
+        }
+    }).catch((error) => {
+        return res.status(500).json({
+            data: null,
+            error: error,
+        });
+    });
+};
+
+module.exports = { getAll, get, create, fund, deleteCampaign };
