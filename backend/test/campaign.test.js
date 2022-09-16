@@ -154,4 +154,23 @@ describe('Testing Campaign API', () => {
         expect(response.body.data).not.toBeNull();
         expect(response.body.error).toBeNull();
     });
+
+    it(" DELETE /campaign/:id - delete specific campaign", async() => {
+        const responseNewCampaign = await createNewCampaignRequest();
+
+        const createdId = responseNewCampaign.body.data.id;
+
+        expect(responseNewCampaign.statusCode).toBe(201);
+
+        const responseDelete = await request(baseURL)
+            .delete(`/campaign/${createdId}`);
+
+        expect(responseDelete.statusCode).toBe(200);
+        expect(responseDelete.body.message).toBe("Campaign deleted successfully!");
+
+        const responseGet = await request(baseURL)
+            .get(`/campaign/${createdId}`);
+
+        expect(responseGet.statusCode).toBe(404);
+    });
 })
