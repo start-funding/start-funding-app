@@ -65,7 +65,7 @@ const create = async(req, res) => {
             owner,
             title,
             description,
-            img,
+            // img,
             targetAlgo,
             state,
             endingDate
@@ -76,7 +76,7 @@ const create = async(req, res) => {
             owner,
             title,
             description,
-            img,
+            req.files[0],
             targetAlgo,
             state,
             endingDate
