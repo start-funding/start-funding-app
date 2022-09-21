@@ -149,6 +149,41 @@ const fund = async(req, res) => {
     }
 };
 
+const update = async(req, res) => {
+    try {
+        const id = req.params.id;
+        const newDescription = req.body.description;
+        const newImg = req.body.img;
+
+        const campaignRef = db.collection('campaigns').doc(`${id}`);
+
+        if (!newDescription && !newImg) {
+            res.status(500).json({
+                message: "Nothing to update.",
+                data: null,
+                error: null
+            });
+        }
+
+        if (newDescription) await campaignRef.update({ description: newDescription });
+
+        if (newImg) await campaignRef.update({ img: newImg });
+
+        const updatedCampaign = await campaignRef.get();
+
+        res.status(200).json({
+            message: "Campaign updated successfully!",
+            data: updatedCampaign.data(),
+            error: null
+        });
+    } catch (error) {
+        return res.status(500).json({
+            data: null,
+            error: error,
+        });
+    }
+};
+
 const deleteCampaign = async(req, res) => {
     const id = req.params.id;
 
@@ -179,4 +214,4 @@ const deleteCampaign = async(req, res) => {
     });
 };
 
-module.exports = { getAll, get, create, fund, deleteCampaign };
+module.exports = { getAll, get, create, fund, update, deleteCampaign };
