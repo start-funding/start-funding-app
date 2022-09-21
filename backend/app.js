@@ -24,4 +24,5 @@ app.post('/campaigns', campaignController.create);
 
 app.get('/campaign/:id', campaignController.get);
 app.post('/campaign/:id', campaignController.fund);
+app.put('/campaign/:id', campaignController.update);
 app.delete('/campaign/:id', campaignController.deleteCampaign);
