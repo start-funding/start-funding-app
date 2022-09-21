@@ -173,4 +173,52 @@ describe('Testing Campaign API', () => {
 
         expect(responseGet.statusCode).toBe(404);
     });
-})
+
+    it(" UPDATE /campaign/:id - update specific campaign", async() => {
+        const responseNewCampaign = await createNewCampaignRequest();
+
+        const createdId = responseNewCampaign.body.data.id;
+
+        const updateDescription = "updateDescription";
+        const updateImg = "updateImg";
+
+        expect(responseNewCampaign.statusCode).toBe(201);
+
+        const response = await request(baseURL)
+            .put(`/campaign/${createdId}`)
+            .send({ description: updateDescription });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.message).toBe("Campaign updated successfully!");
+
+        expect(response.body.data.description).toEqual(updateDescription);
+
+        expect(response.body.data).not.toBeNull();
+        expect(response.body.error).toBeNull();
+
+        const response2 = await request(baseURL)
+            .put(`/campaign/${createdId}`)
+            .send({ img: updateImg });
+
+        expect(response2.statusCode).toBe(200);
+        expect(response2.body.message).toBe("Campaign updated successfully!");
+
+        expect(response2.body.data.img).toEqual(updateImg);
+
+        expect(response2.body.data).not.toBeNull();
+        expect(response2.body.error).toBeNull();
+
+        const response3 = await request(baseURL)
+            .put(`/campaign/${createdId}`)
+            .send({ description: updateDescription, img: updateImg });
+
+        expect(response3.statusCode).toBe(200);
+        expect(response3.body.message).toBe("Campaign updated successfully!");
+
+        expect(response3.body.data.description).toEqual(updateDescription);
+        expect(response3.body.data.img).toEqual(updateImg);
+
+        expect(response3.body.data).not.toBeNull();
+        expect(response3.body.error).toBeNull();
+    });
+});
