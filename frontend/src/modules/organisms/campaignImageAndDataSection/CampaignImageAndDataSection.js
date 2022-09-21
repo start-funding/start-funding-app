@@ -94,18 +94,18 @@ export default function CampaignImageAndDataSection(props) {
                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                 <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                                     <Typography variant="body2" color="text.secondary">
-                                        {Math.round( props.campaign.collectedFounds)} Algos
+                                        {Math.round( props.campaign.collectedFunds)} Algos
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
                                         {props.campaign.donatorsNumber} donators
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: '100%', mr: 1 }}>
-                                    <LinearProgress variant="determinate" value={props.campaign.collectedFounds * 100 / props.campaign.target > 100 ? 100 : props.campaign.collectedFounds * 100 / props.campaign.target} />
+                                    <LinearProgress variant="determinate" value={props.campaign.collectedFunds * 100 / props.campaign.target > 100 ? 100 : props.campaign.collectedFunds * 100 / props.campaign.target} />
                                 </Box>
                                 <Box sx={{ minWidth: 35 }}>
                                     <Typography variant="body2" color="text.secondary">
-                                        {props.campaign.collectedFounds * 100 / props.campaign.target}% of {props.campaign.target} Algos
+                                        {props.campaign.collectedFunds * 100 / props.campaign.target}% of {props.campaign.target} Algos
                                     </Typography>
                                 </Box>
                             </Box>

@@ -49,22 +49,36 @@ export default function SaveCampaignButton(props) {
                 } else {
 
                     console.log(props.campaign)
+                    let formData = new FormData();
                     
+                    formData.append('id', props.campaign.id)                    
+                    formData.append('file', props.campaign.image)                    
+                    formData.append('description', props.campaign.description)                    
+                    formData.append('owner', props.campaign.owner)                    
 
                     // Axios post call
-                    axios.post(`${api}${Conf.backend.endpoints.createCampaign}`, {
-                        description: props.campaign.description,
-                        image: props.campaign.image
-                    })
+                    
+                    axios.put(`${api}${Conf.backend.endpoints.updateCampaign}/${props.campaign.id}`, formData)
                     .then(res => {
                         console.log(res);
+                        switch(res.status) {
+                            case 200:
+                                props.setEditing(false)
+                                navigate(`/campaign/${props.campaign.id}`)
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }
+                         // Redirect to campaign page
+                    
                     })
                     .catch(err => {
                         console.log(err);
+                        alert(err)
                     })
-                    // Redirect to campaign page
-                    props.setEditing(false)
-                    navigate(`/campaign/${props.campaign.id}`)
+                   
+                    
                 }
             }
 
@@ -76,7 +90,7 @@ export default function SaveCampaignButton(props) {
                 id: getRandomInt(1, 12),
                 name: props.campaign.name,
                 target: props.campaign.target,
-                endingDate: dateFormatter(props.campaign.endingDate['$d'], "-"),
+                endingDate: props.campaign.endingDate['$d'].getTime(),
                 description: props.campaign.description,
                 image: props.campaign.image
             }

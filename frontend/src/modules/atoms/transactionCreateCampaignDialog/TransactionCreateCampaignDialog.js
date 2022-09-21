@@ -2,7 +2,7 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextFiel
 import algosdk from "algosdk";
 import axios from "axios";
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Conf from '../../../conf/conf.json';
 
 const style = {
@@ -20,6 +20,7 @@ const style = {
 let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
 
 export default function TransactionCreateCampaignDialog(props) {
+    const navigate = useNavigate();
     const [address, setAddress ] = useState("");
  
     const handleAddressChange = (e) => {
@@ -100,8 +101,10 @@ export default function TransactionCreateCampaignDialog(props) {
                         .then(res => {
                             console.log(res);
                             switch(res.status) {
-                                case 200:
-                                    Navigate(`/campaign/${d.txId}`)
+                                case 201:
+                                    props.handleCloseModal()
+                                    console.log("Prima di redirect")
+                                    navigate(`/campaign/${res.data.data.id}`)
                                     break;
                                 case 500:
                                     alert("Error in campaign creation.")

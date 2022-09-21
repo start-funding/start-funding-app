@@ -7,7 +7,7 @@ export default function CampaignDescriptionSection(props) {
         if (!props.createCampaignPage) {
             props.setCampaignDescription(props.campaign.description)
         }
-    });
+    }, []);
 
     const handleCampaignDescriptionChange = (e) => {
         props.setCampaignDescription(e.target.value);

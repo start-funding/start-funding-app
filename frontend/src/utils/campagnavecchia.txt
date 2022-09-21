@@ -42,7 +42,7 @@ export default function Campaign() {
                 name: "Prova titolo campagna",
                 donatorsNumber: 15,
                 target: 5000,
-                collectedFounds: 2345,
+                collectedFunds: 2345,
                 endingDate: "23-12-2022",
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 image: "/img/prototipo_auto.jpg"
@@ -242,18 +242,18 @@ export default function Campaign() {
                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                 <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                                     <Typography variant="body2" color="text.secondary">
-                                        {Math.round( project.collectedFounds)} Algos
+                                        {Math.round( project.collectedFunds)} Algos
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
                                         {project.donatorsNumber} donators
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: '100%', mr: 1 }}>
-                                    <LinearProgress variant="determinate" value={project.collectedFounds * 100 / project.target} />
+                                    <LinearProgress variant="determinate" value={project.collectedFunds * 100 / project.target} />
                                 </Box>
                                 <Box sx={{ minWidth: 35 }}>
                                     <Typography variant="body2" color="text.secondary">
-                                        {project.collectedFounds * 100 / project.target}% of {project.target} Algos
+                                        {project.collectedFunds * 100 / project.target}% of {project.target} Algos
                                     </Typography>
                                 </Box>
                             </Box>

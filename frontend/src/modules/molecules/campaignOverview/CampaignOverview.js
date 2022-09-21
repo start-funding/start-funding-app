@@ -21,7 +21,7 @@ export default function CampaignOverview(props) {
                         {props.campaign.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {props.campaign.collectedFounds} / {props.campaign.target}
+                        {props.campaign.collectedFunds} / {props.campaign.target}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {props.campaign.endingDate}

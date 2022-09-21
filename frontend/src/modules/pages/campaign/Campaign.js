@@ -24,24 +24,27 @@ export default function Campaign(props) {
     
     // New campaig
     
-    let campaignUpdated = {
-        description: campaignDescription,
-        image: file
-    }
-
+    
     let { id } = useParams();
     const [campaign, setCampaign] = useState({});
     const [editing, setEditing] = useState(false);
-
+    
+    let campaignUpdated = {
+        description: campaignDescription,
+        image: file,
+        id: id
+    }
     useEffect(() => {    
         (async () => {
             // Recupero dati campagna da axios
-            axios.get(`${api}${Conf.backend.endpoints.getCampaign}?id${id}`)
+            axios.get(`${api}${Conf.backend.endpoints.getCampaign}/${id}`)
             .then(res => {
                 console.log(res);
                 switch(res.status) {
                     case 200:
                         setCampaign(res.data.data)
+                        setCampaignDescription(res.data.data.description)
+                        campaignUpdated.owner = res.data.data.owner;
                         break;
                     case 500:
                         alert("Error in campaign creation.")
@@ -52,7 +55,7 @@ export default function Campaign(props) {
                 console.log(err);
             })
         })();
-    }, []);
+    }, [editing]);
 
     
 

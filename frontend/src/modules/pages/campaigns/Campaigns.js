@@ -54,13 +54,13 @@ export default function Campaigns(props) {
                     filterMatch = false
             }
             if (filters.minCollectedFilter !== "" && filters.minCollectedFilter >= 0) {
-                if (campaign.collectedFounds < filters.minCollectedFilter) {
+                if (campaign.collectedFunds < filters.minCollectedFilter) {
                     filterMatch = false
                 }
             }
 
             if (filters.maxCollectedFilter !== "" && filters.maxCollectedFilter >= 0) {
-                if (campaign.collectedFounds > filters.maxCollectedFilter) {
+                if (campaign.collectedFunds > filters.maxCollectedFilter) {
                     filterMatch = false
                 }
             }

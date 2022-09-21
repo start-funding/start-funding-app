@@ -5,7 +5,8 @@
         "basePath": "",
         "endpoints": {
             "createCampaign": "campaigns",
-            "getCampaign": "campaign"
+            "getCampaign": "campaign",
+            "updateCampaign": "campaign"
         }
     }
 }
