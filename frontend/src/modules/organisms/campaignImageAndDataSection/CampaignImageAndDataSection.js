@@ -5,7 +5,13 @@ import CampaignNameInput from "../../atoms/campaignNameInput/CampaignNameInput";
 import CampaignTargetInput from "../../atoms/campaignTargetInput/CampaignTargetInput";
 import CampaignEndingDateInput from "../../atoms/campaignEndingDateInput/CampaignEndingDateInput";
 
+import algosdk from "algosdk";
+import CampaignMakeContributionButton from "../../atoms/campaignMakeContributionButton/CampaignMakeContributionButton";
+
+
 export default function CampaignImageAndDataSection(props) {    
+
+    
     return (
         <Grid container spacing={2} style={{ paddingLeft: "10%", paddingRight: "10%"  }}>
             <Grid item xs={12} md={6} style={{ width: "50%", height: "100%", height: "60vh" }}>
@@ -134,10 +140,10 @@ export default function CampaignImageAndDataSection(props) {
                             props.createCampaignPage ?
                                 <span></span>
                             :
-                                props.editing || props.campaign.owner === props.userAddress || props.campaign.state != "active" ?
+                                props.editing || props.algoAddresses.includes(props.campaign.owner) || props.campaign.state != "active" || !props.algoSignerActive ?
                                     <span></span>
                                 :
-                                    <Button className="actionButton" variant="contained">Make contribution</Button>
+                                <CampaignMakeContributionButton algoAddresses={props.algoAddresses} />
                         }
                 </Card>
             </Grid>

@@ -25,7 +25,7 @@ export default function CampaignTopButtonsBar(props) {
             </Grid>
         )
     } else {
-        if (props.userAddress === props.campaign.owner && props.campaign.state === "active") {
+        if (props.algoAddresses.includes(props.campaign.owner) && props.campaign.state === "active") {
             if (props.editing) {
                 return (
                     <Grid container spacing={2} justifyContent="center" style={{ paddingLeft: "5%", paddingRight: "5%" }}>

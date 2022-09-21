@@ -15,6 +15,18 @@ function newDateFromMonthDayYear(dateString) {
     return new Date(`${dateString.split("-")[2]}-${dateString.split("-")[1]}-${dateString.split("-")[0]}`);
 }
 
+function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+ }
+
 module.exports.dateFormatter = dateFormatter;
 module.exports.getRandomInt = getRandomInt;
 module.exports.newDateFromMonthDayYear = newDateFromMonthDayYear;
+module.exports.getBase64 = getBase64;

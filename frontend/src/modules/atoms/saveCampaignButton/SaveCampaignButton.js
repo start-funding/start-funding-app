@@ -1,8 +1,12 @@
 import { Button } from "@mui/material";
+import axios from "axios";
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dateFormatter, getRandomInt } from "../../../utils/utils";
 import ModalError from "../modalError/ModalError";
+
+import Conf from '../../../conf/conf.json';
+import { getBase64 } from "../../../utils/utils";
 
 export default function SaveCampaignButton(props) {
     const navigate = useNavigate();
@@ -11,6 +15,8 @@ export default function SaveCampaignButton(props) {
     const [open, setOpen] = useState(false);
     const [modalErrorText, setModalErrorText] = useState("");
     const handleOpenModal = () => setOpen(true);
+
+    let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
 
 
 
@@ -27,9 +33,19 @@ export default function SaveCampaignButton(props) {
                 } else {
 
                     console.log(props.campaign)
+                    
 
                     // Axios post call
-
+                    axios.post(`${api}${Conf.backend.endpoints.createCampaign}`, {
+                        description: props.campaign.description,
+                        image: props.campaign.image
+                    })
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
                     // Redirect to campaign page
                     props.setEditing(false)
                     navigate(`/campaign/${props.campaign.id}`)
@@ -76,10 +92,24 @@ export default function SaveCampaignButton(props) {
 
                                 console.log(newCampaign)
 
+                                const data = new FormData();
+                                data.append('name', newCampaign.name);
+                                data.append('target', newCampaign.target);
+                                data.append('endingDate', newCampaign.endingDate);
+                                data.append('description', newCampaign.description);
+                                data.append('file', newCampaign.image);
+
                                 // Axios post call
+                                axios.post(`${api}${Conf.backend.endpoints.createCampaign}`, data)
+                                .then(res => {
+                                    console.log(res);
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                })
 
                                 // Redirect to campaign page
-                                navigate(`/campaign/${newCampaign.id}`)
+                               //navigate(`/campaign/${newCampaign.id}`)
                             }
                         }
                     }

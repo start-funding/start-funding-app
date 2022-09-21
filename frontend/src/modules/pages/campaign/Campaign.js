@@ -28,11 +28,9 @@ export default function Campaign(props) {
     let { id } = useParams();
     const [campaign, setCampaign] = useState({});
     const [editing, setEditing] = useState(false);
-    const [userAddress, setUserAddress] = useState("addressowner");
 
     useEffect(() => {    
         (async () => {
-            console.log(id)
             // Recupero dati campagna da axios
             let fetchedCampaign = MockData.top12.filter(campaign => campaign.id === parseInt(id))[0];
 
@@ -56,7 +54,7 @@ export default function Campaign(props) {
                 editing={editing}
                 setEditing={setEditing}
                 createCampaignPage={false}
-                userAddress={userAddress}
+                algoAddresses={props.algoAddresses}
                 updateNavActive={props.updateNavActive}
             />
             <GridSpacer 
@@ -76,6 +74,8 @@ export default function Campaign(props) {
                 createCampaignPage={false}
                 editing={editing}
                 campaign={campaign}
+                algoAddresses={props.algoAddresses}
+                algoSignerActive={props.algoSignerActive}
             />
             
             <GridSpacer 
