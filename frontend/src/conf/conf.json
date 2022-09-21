@@ -2,9 +2,10 @@
     "backend": {
         "ip": "localhost",
         "port": "3000",
-        "basePath": "/api/v1/",
+        "basePath": "",
         "endpoints": {
-            "createCampaign": "createCampaign"
+            "createCampaign": "campaigns",
+            "getCampaign": "campaign"
         }
     }
 }

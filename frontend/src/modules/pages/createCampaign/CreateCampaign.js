@@ -35,6 +35,7 @@ export default function CreateCampaign(props) {
                 campaignToSave={campaign}
                 createCampaignPage={true}
                 updateNavActive={props.updateNavActive}
+                algoAddresses={props.algoAddresses}
             />
             <GridSpacer 
                 height="5vh" 
@@ -51,6 +52,7 @@ export default function CreateCampaign(props) {
                 setCampaignTarget={setCampaignTarget}
                 setCampaignEndingDate={setCampaignEndingDate}
                 createCampaignPage={true}
+                
             />
             <GridSpacer 
                 height="2vh" 

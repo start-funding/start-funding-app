@@ -89,7 +89,7 @@ function App() {
         {/* Central content */}
         <Routes>
           <Route exact path="/" element={<Home updateNavActive={updateNavActive}/>} />
-          <Route path="/createcampaign" element={<CreateCampaign updateNavActive={updateNavActive} />} />
+          <Route path="/createcampaign" element={<CreateCampaign updateNavActive={updateNavActive} algoAddresses={algoAddresses} />} />
           <Route path="/campaign/:id" element={<Campaign updateNavActive={updateNavActive} algoSignerActive={algoSignerActive} algoAddresses={algoAddresses} />} />
           <Route path="/campaigns" element={<Campaigns updateNavActive={updateNavActive}/>} />
         </Routes>

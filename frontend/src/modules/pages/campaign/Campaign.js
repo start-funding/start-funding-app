@@ -7,8 +7,12 @@ import './campaign.scss'
 import CampaignTopButtonsBar from "../../organisms/campaignTopButtonsBar/CampaignTopButtonsBar";
 import CampaignImageAndDataSection from "../../organisms/campaignImageAndDataSection/CampaignImageAndDataSection";
 import CampaignDescriptionSection from "../../organisms/campaignDescriptionSection/CampaignDescriptionSection";
+import Conf from '../../../conf/conf.json';
+import axios from "axios";
 
-import MockData from '../../../utils/mockData.json';
+
+let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
+
 
 export default function Campaign(props) {
     // Form inputs
@@ -32,10 +36,21 @@ export default function Campaign(props) {
     useEffect(() => {    
         (async () => {
             // Recupero dati campagna da axios
-            let fetchedCampaign = MockData.top12.filter(campaign => campaign.id === parseInt(id))[0];
-
-            // Setto lo stato
-            setCampaign(fetchedCampaign)
+            axios.get(`${api}${Conf.backend.endpoints.getCampaign}?id${id}`)
+            .then(res => {
+                console.log(res);
+                switch(res.status) {
+                    case 200:
+                        setCampaign(res.data.data)
+                        break;
+                    case 500:
+                        alert("Error in campaign creation.")
+                        break;
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
         })();
     }, []);
 
