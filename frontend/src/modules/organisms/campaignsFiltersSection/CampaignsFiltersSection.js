@@ -12,16 +12,16 @@ export default function CampaignsFilterSection(props) {
             <Grid item md={6} className="filtersGridElement">
 
                 {/* Filtro nome campagna */}
-                <CampaignsNameFilter
+                {/*<CampaignsNameFilter
                     campaignName={props.campaignName}
                     setCampaignName={props.setCampaignName}
-                />
+                />*/}
 
                 {/* Filtro data fine */}
-                <CampaignsEndingDateFilter
+                {/*<CampaignsEndingDateFilter
                     campaignEndingDate={props.campaignEndingDate}
                     setCampaignEndingDate={props.setCampaignEndingDate}
-                />
+                />*/}
 
 
                 {/* Filtro stato */}
@@ -29,9 +29,7 @@ export default function CampaignsFilterSection(props) {
                     state={props.state}
                     setState={props.setState}
                 />
-            </Grid>
-            <Grid item md={6} className="filtersGridElement">
-                {/* Filtro algo raccolti */}
+                    {/* Filtro algo raccolti */}
                 <CampaignsMinAndMaxCollectedRangeFilter
                     minCollectedRange={props.minCollectedRange}
                     setMinCollectedRange={props.setMinCollectedRange}
@@ -39,6 +37,11 @@ export default function CampaignsFilterSection(props) {
                     setMaxCollectedRange={props.setMaxCollectedRange}
                 />
             </Grid>
+            {/*
+                <Grid item md={6} className="filtersGridElement">
+                </Grid>
+
+            */}
         </Grid>
     )
 }

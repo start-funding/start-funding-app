@@ -11,6 +11,7 @@ export default function CampaignOverviewGrid(props) {
                         key={campaign.id} 
                         campaign={campaign} 
                         updateNavActive={props.updateNavActive} 
+                        pageNumber={props.pageNumber}
                     />
                 )
             })}

@@ -20,10 +20,12 @@ export default function CampaignMakeContributionButton(props) {
             <Button style={{width:"100%"}} className="actionButton" variant="contained" onClick={handleOpenModal}>Make contribution</Button>
             <TransactionDialog 
                 text={"Compile contribution form"} 
-                hangleCloseModal={handleCloseModal} 
+                handleCloseModal={handleCloseModal} 
                 open={open} 
                 algoAddresses={props.algoAddresses}
                 buttonText={"Create transaction"}
+                campaign={props.campaign}
+                setCampaignTarget={props.setCampaignTarget}
             />
         </div>
     )

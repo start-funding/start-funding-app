@@ -140,10 +140,15 @@ export default function CampaignImageAndDataSection(props) {
                             props.createCampaignPage ?
                                 <span></span>
                             :
-                                props.editing || props.algoAddresses.includes(props.campaign.owner) || props.campaign.state != "active" || !props.algoSignerActive ?
+                            /*|| props.algoAddresses.includes(props.campaign.owner)*/
+                                props.editing  || props.campaign.state != "active" || !props.algoSignerActive ?
                                     <span></span>
                                 :
-                                <CampaignMakeContributionButton algoAddresses={props.algoAddresses} />
+                                <CampaignMakeContributionButton 
+                                    algoAddresses={props.algoAddresses} 
+                                    campaign={props.campaign}
+                                    setCampaignTarget={props.setCampaignTarget}
+                                />
                         }
                 </Card>
             </Grid>

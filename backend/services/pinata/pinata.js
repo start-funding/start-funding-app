@@ -1,5 +1,5 @@
 const pinataSDK = require('@pinata/sdk');
-const pinataConf = require('./conf/pinataConf.js').pinataConf;
+const pinataConf = require('../../conf/pinataConf.js').pinataConf;
 const pinata = pinataSDK(pinataConf.PINATA_API_KEY, pinataConf.PINATA_API_SECRET);
 
 async function pinFileToIPFS(file, campaignId, campaignOwner) {

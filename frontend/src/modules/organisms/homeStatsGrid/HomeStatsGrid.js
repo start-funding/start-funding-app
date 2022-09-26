@@ -3,14 +3,13 @@ import { Card, CardContent, Grid, Typography } from "@mui/material";
 import './homeStatsGrid.scss';
 
 export default function HomeStatsGrid(props) {
-    console.log(props)
     return(
         <Grid container spacing={2} justifyContent="center" id="home-grid-second-block">
                 <Grid item xs={12} md={3} className="statsElement">
                     <Card>
                         <CardContent>
                             <Typography variant="h5"  align="center">
-                                {props.stats.campagneCompletate}
+                                {props.stats.successfulCampaigns}
                             </Typography>
                             <Typography align="center">
                                 completed campaigns
@@ -22,7 +21,7 @@ export default function HomeStatsGrid(props) {
                     <Card>
                         <CardContent>
                             <Typography variant="h5"  align="center">
-                                {props.stats.totaleAlgoRaccolti}
+                                {props.stats.foundsCollected}
                             </Typography>
                             <Typography align="center">
                                 Algos collected
@@ -34,7 +33,7 @@ export default function HomeStatsGrid(props) {
                     <Card>
                         <CardContent>
                             <Typography variant="h5"  align="center">
-                                {props.stats.campagneTotali}
+                                {props.stats.totalCampaigns}
                             </Typography>
                             <Typography align="center">
                                 total campaigns

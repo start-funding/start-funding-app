@@ -14,7 +14,7 @@ export default function CampaignOverview(props) {
                     component="img"
                     height="200"
                     image={props.campaign.image}
-                    alt="green iguana"
+                    alt="campaign image"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">

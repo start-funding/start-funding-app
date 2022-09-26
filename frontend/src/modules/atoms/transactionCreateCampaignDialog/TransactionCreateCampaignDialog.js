@@ -62,7 +62,6 @@ export default function TransactionCreateCampaignDialog(props) {
                 genesisID: txParams['genesis-id'],
                 fee: 1000
             }
-            console.log(txParams)
 
             const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
                 from: address,
@@ -77,15 +76,11 @@ export default function TransactionCreateCampaignDialog(props) {
             
             window.AlgoSigner.signTxn([{txn:txn_b64}])
             .then(d => {
-                console.log(d)
                 window.AlgoSigner.send({
                     ledger: 'TestNet',
                     tx: d[0].blob
                   })
                   .then(d => {
-                    console.log(d)
-                    //alert(`Created transaction with id: ${d.txId}`)
-
 
                     const data = new FormData();
                     data.append('name', props.newCampaign.name);
@@ -99,11 +94,9 @@ export default function TransactionCreateCampaignDialog(props) {
                      // Axios post call -> Send transaction data to backend
                      axios.post(`${api}${Conf.backend.endpoints.createCampaign}`, data)
                         .then(res => {
-                            console.log(res);
                             switch(res.status) {
                                 case 201:
                                     props.handleCloseModal()
-                                    console.log("Prima di redirect")
                                     navigate(`/campaign/${res.data.data.id}`)
                                     break;
                                 case 500:

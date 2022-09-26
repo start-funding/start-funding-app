@@ -6,7 +6,11 @@
         "endpoints": {
             "createCampaign": "campaigns",
             "getCampaign": "campaign",
-            "updateCampaign": "campaign"
+            "updateCampaign": "campaign",
+            "fundCampaign": "campaign",
+            "filterCampaigns": "filterCampaigns",
+            "top12": "top12",
+            "stats": "stats"
         }
     }
 }

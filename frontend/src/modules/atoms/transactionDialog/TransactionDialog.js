@@ -1,6 +1,10 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
 import algosdk from "algosdk";
+import axios from "axios";
 import React, { useState } from "react";
+import Conf from '../../../conf/conf.json';
+
+let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
 
 const style = {
     position: 'absolute',
@@ -68,7 +72,6 @@ export default function TransactionDialog(props) {
                 genesisID: txParams['genesis-id'],
                 fee: 1000
             }
-            console.log(txParams)
 
             const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
                 from: address,
@@ -83,14 +86,34 @@ export default function TransactionDialog(props) {
             
             window.AlgoSigner.signTxn([{txn:txn_b64}])
             .then(d => {
-                console.log(d)
                 window.AlgoSigner.send({
                     ledger: 'TestNet',
                     tx: d[0].blob
                   })
                   .then(d => {
-                    console.log(d)
-                    alert(`Created transaction with id: ${d.txId}`)
+                    //alert(`Created transaction with id: ${d.txId}`)
+
+                    axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
+                        addressFrom: address,
+                        amount: amount
+                    })
+                    .then(res => {
+                        switch(res.status) {
+                            case 200:
+                                props.handleCloseModal()
+                            
+                                props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
+                                alert(res.data.message)
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }                    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert(err)
+                    })
                 })
                   .catch(e => console.error(e));
             })

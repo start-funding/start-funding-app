@@ -4,6 +4,7 @@ import CampaignOverviewGrid from "../../molecules/campaignOverviewGrid/CampaignO
 export default function CampaignsResultsSection(props) {
     return (
         <CampaignOverviewGrid 
+            pageNumber={props.pageNumber}
             campaigns={props.campaigns}
             updateNavActive={props.updateNavActive}
         />

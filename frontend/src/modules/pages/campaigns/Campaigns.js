@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Data from '../../../utils/mockData.json';
+import axios from "axios";
 import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
 import { dateFormatter, newDateFromMonthDayYear } from "../../../utils/utils";
 import CampaignsFilterSection from "../../organisms/campaignsFiltersSection/CampaignsFiltersSection";
 import CampaignsResultsSection from "../../organisms/campaignsResultsSection/CampaignsResultsSection";
 import CampaingsPaginationSection from "../../organisms/campaignsPaginationSection/CampaignsPaginationSection";
+import Conf from '../../../conf/conf.json';
+
+let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
+
 
 export default function Campaigns(props) {
 
@@ -13,7 +18,7 @@ export default function Campaigns(props) {
 
     // Pagination
     const [pageNumber, setPageNumber] = useState(1);
-    const [resultsPerPage, setResultsPerPage] = useState(10);
+    const [resultsPerPage, setResultsPerPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
     const [totalResults, setTotalResults] = useState(0);
 
@@ -26,21 +31,11 @@ export default function Campaigns(props) {
 
     useEffect(() => {
         searchCampaigns();
-    }, [minCollectedRange, maxCollectedRange, campaignName, campaignEndingDate, state, pageNumber, resultsPerPage, totalPages]);
+    }, [minCollectedRange, maxCollectedRange, campaignName, campaignEndingDate, state, pageNumber, resultsPerPage]);
 
     function searchCampaigns() {
-        let filters = {
-            nameFilter: campaignName,
-            endingDateFilter: campaignEndingDate == null ? "" : dateFormatter(campaignEndingDate['$d'], "-"),
-            minCollectedFilter: minCollectedRange,
-            maxCollectedFilter: maxCollectedRange,
-            stateFilter: state,
-            page: pageNumber,
-            resultsPerPage: resultsPerPage
-        }
 
-        let campTotal = [];
-
+        /*
         Data.top12.forEach(campaign => {
             let filterMatch = true;
 
@@ -89,11 +84,36 @@ export default function Campaigns(props) {
                 totalPages: Math.ceil(campTotal.length / filters.resultsPerPage)
             }
         }
-
+        */
         // leggo risultati
-        setCampaigns(res.campaigns);
-        setTotalPages(res.pagination.totalPages);
-        setTotalResults(res.pagination.totalResults)
+
+        axios.post(`${api}${Conf.backend.endpoints.filterCampaigns}`, {
+            minCollected: minCollectedRange === "" ? 0 : minCollectedRange,
+            maxCollected: maxCollectedRange === "" ? Number.MAX_SAFE_INTEGER : maxCollectedRange,
+            state: state === "" ? "all" : state,
+            page: pageNumber,
+            resultsPerPage: resultsPerPage
+        })
+        .then(res => {
+            switch(res.status) {
+                case 200:
+                    setCampaigns(res.data.data.campaigns);
+                    setTotalPages(res.data.data.pagination.totalPages);
+                    setTotalResults(res.data.data.pagination.totalResults)
+                    break;
+                case 500:
+                    alert(res.data.message)
+                    break;
+            }
+             // Redirect to campaign page
+        
+        })
+        .catch(err => {
+            console.log(err);
+            alert(err)
+        })
+
+        
     }
 
     return (
@@ -122,6 +142,7 @@ export default function Campaigns(props) {
 
             {/* Search results section */}
             <CampaignsResultsSection
+                pageNumber={pageNumber}
                 campaigns={campaigns}
                 updateNavActive={props.updateNavActive}
             />

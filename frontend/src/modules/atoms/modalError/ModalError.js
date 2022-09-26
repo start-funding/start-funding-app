@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 export default function ModalError(props) {
     
     const handleCloseModal = () => {
-        console.log("dentro")
         props.setOpen(false)
     };
 

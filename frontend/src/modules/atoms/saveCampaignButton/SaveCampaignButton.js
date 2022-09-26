@@ -48,7 +48,6 @@ export default function SaveCampaignButton(props) {
                     handleOpenModal()
                 } else {
 
-                    console.log(props.campaign)
                     let formData = new FormData();
                     
                     formData.append('id', props.campaign.id)                    
@@ -60,7 +59,6 @@ export default function SaveCampaignButton(props) {
                     
                     axios.put(`${api}${Conf.backend.endpoints.updateCampaign}/${props.campaign.id}`, formData)
                     .then(res => {
-                        console.log(res);
                         switch(res.status) {
                             case 200:
                                 props.setEditing(false)
@@ -74,11 +72,8 @@ export default function SaveCampaignButton(props) {
                     
                     })
                     .catch(err => {
-                        console.log(err);
                         alert(err)
                     })
-                   
-                    
                 }
             }
 
@@ -120,16 +115,12 @@ export default function SaveCampaignButton(props) {
                                 handleOpenModal()
                             } else {
 
-                                console.log(newC)
-
                                 setNewCampaign(newC);
 
                                 // Creare transazione
                                 // Aggiungere address owner
                                 handleOpenTransactionModal()
                                 
-                               
-
                                 // Redirect to campaign page
                                //navigate(`/campaign/${newCampaign.id}`)
                             }
@@ -150,7 +141,7 @@ export default function SaveCampaignButton(props) {
                 algoAddresses={props.algoAddresses}
                 open={openTransactionModal}
                 handleCloseModal={handleCloseTransactionModal}
-                text={`Confirm the campaign creation. You will be charged of 3% of the target.`}
+                text={`Confirm the campaign creation. You will be charged of 1% of the target.`}
                 buttonText={"Create campaign"}
             />
         </div>

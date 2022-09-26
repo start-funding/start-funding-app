@@ -39,7 +39,6 @@ export default function Campaign(props) {
             // Recupero dati campagna da axios
             axios.get(`${api}${Conf.backend.endpoints.getCampaign}/${id}`)
             .then(res => {
-                console.log(res);
                 switch(res.status) {
                     case 200:
                         setCampaign(res.data.data)
@@ -55,7 +54,7 @@ export default function Campaign(props) {
                 console.log(err);
             })
         })();
-    }, [editing]);
+    }, [editing, campaignTarget]);
 
     
 

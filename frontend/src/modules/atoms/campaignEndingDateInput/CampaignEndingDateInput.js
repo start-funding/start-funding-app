@@ -9,7 +9,6 @@ export default function CampaignEndingDateInput(props) {
 
     useEffect(() => {
         if (!props.createCampaignPage) {
-            console.log(props.campaign.endingDate)
             props.setCampaignEndingDate(
                 dayjs(new Date(props.campaign.endingDate))
             );
