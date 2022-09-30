@@ -1,0 +1,13 @@
+@import '../../../generalStyles/variables.scss';
+
+.filtersGridContainer {
+    justify-content: "center";
+    padding: 0 5%;
+
+    .filtersGridElement {
+        width: 100%;
+        display: flex;
+        gap: 4vw;
+        align-items: center;
+    }
+}

@@ -1,4 +1,5 @@
 const express = require('express');
+const job = require('./scheduled/statsUpdater').job;
 
 const app = express();
 const PORT = 3000;
@@ -29,6 +30,18 @@ app.get('/campaigns', campaignController.getAll);
 app.post('/campaigns', upload.array("file"), campaignController.create);
 
 app.get('/campaign/:id', campaignController.get);
-app.post('/campaign/:id', campaignController.fund);
+app.post('/campaign/:id', campaignController.fund); <<
+<< << < HEAD
 app.put('/campaign/:id', campaignController.update);
+app.delete('/campaign/:id', campaignController.deleteCampaign); ===
+=== =
+app.put('/campaign/:id', upload.array("file"), campaignController.update);
 app.delete('/campaign/:id', campaignController.deleteCampaign);
+
+// Search
+app.post('/filterCampaigns', campaignController.filterCampaigns)
+app.get('/top12', campaignController.top12)
+
+// Stats
+app.get('/stats', campaignController.stats) >>>
+    >>> > main

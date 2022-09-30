@@ -1,0 +1,19 @@
+@import '../../../generalStyles/variables.scss';
+
+.avatar {
+    margin-right: auto;
+    color: white;
+    background-color: black;
+    border-radius: 0;
+    height: 30px;
+    border: "2px solid gray";
+    border-left: "12px solid transparent";
+    border-right: "12px solid transparent";
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}

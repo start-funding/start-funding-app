@@ -1,0 +1,341 @@
+import { Button, Card, CardActionArea, CardActions, CardMedia, Grid, IconButton, LinearProgress, Modal, TextField, Typography } from "@mui/material";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { React, useState, useEffect } from "react";
+import GridSpacer from "../../atoms/gridSpacer/GridSpacer";
+import dayjs from 'dayjs';
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+import { dateFormatter, getRandomInt } from "../../../utils/utils";
+
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Box } from "@mui/system";
+
+import './campaign.scss'
+import CampaignImageUpload from "../../molecules/campaignImageUpload/CampaignImageUpload";
+import CampaignTopButtonsBar from "../../organisms/campaignTopButtonsBar/CampaignTopButtonsBar";
+
+
+export default function Campaign() {
+
+    // New campaign
+    let campaign = {
+        name: campaignName,
+        target: campaignTarget,
+        endingDate: campaignEndingDate,
+        description: campaignDescription,
+        image: file
+    }
+    
+    let { id } = useParams();
+    const [project, setProject] = useState({});
+    const [updating, setUpdating] = useState(false);
+
+    let userAddress = "addressowner";
+    useEffect(() => {    
+        (async () => {
+            // Recupero dati campagna da axios
+            let fetchedProject = {
+                projectId: id,
+                owner: "addressowner",
+                state: "open",
+                name: "Prova titolo campagna",
+                donatorsNumber: 15,
+                target: 5000,
+                collectedFunds: 2345,
+                endingDate: "23-12-2022",
+                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                image: "/img/prototipo_auto.jpg"
+            };
+    
+            // Setto lo stato
+            setProject(fetchedProject)
+
+        })();
+    }, []);
+
+    const navigate = useNavigate();
+
+
+    // Immagine
+    const [file, setFile] = useState(null);
+   
+   
+
+    // Modal errore
+    const [open, setOpen] = useState(false);
+    const [modalErrorText, setModalErrorText] = useState("");
+    const handleOpenModal = () => setOpen(true);
+    const handleCloseModal = () => setOpen(false);
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'white',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    // Form
+    const [projectName, setProjectName] = useState("");
+    const [projectTarget, setProjectTarget] = useState(0);
+    const [projectEndingDate, setProjectEndingDate] = useState(dayjs(new Date()));
+    const [projectDescription, setProjectDescription] = useState("");
+
+    const handleProjectNameChange = (e) => {
+        console.log(e.target.value)
+        setProjectName(e.target.value);
+    };
+
+    const handleProjectTargetChange = (e) => {
+        setProjectTarget(parseFloat(e.target.value));
+    };
+
+    const handleProjectEndingDateChange = (e) => {
+        setProjectEndingDate(dayjs(e));
+    };
+
+    const handleProjectDescriptionChange = (e) => {
+        setProjectDescription(e.target.value);
+    };
+
+    function saveProject() {
+
+        // Recupero i dati
+        let newProject = {
+            projectId: getRandomInt(1, 12),
+            projectName: projectName,
+            projectTarget: projectTarget,
+            projectEndingDate: dateFormatter(projectEndingDate['$d'], "-"),
+            projectDescription: projectDescription,
+            image: file
+        }
+
+        // Controlli
+        if (newProject.projectName === "") {
+            setModalErrorText("Name field can't be empty.")
+            handleOpenModal()
+        } else {
+
+            if (newProject.projectTarget === 0 || newProject.projectTarget < 0) {
+                setModalErrorText(newProject.projectTarget === 0 ? "The project target can't be 0." : "The project target can't be a negative number.")
+                handleOpenModal()
+            } else {
+                console.log(projectEndingDate['$d'])
+                console.log((new Date()).getTime() - projectEndingDate['$d'].getTime())
+
+                if (projectEndingDate['$d'].getTime() - (new Date()).getTime() <= 0) {
+                    setModalErrorText("The date selected is not valid, it has to be grater than today.")
+                    handleOpenModal()
+                } else {
+
+                    if (newProject.projectDescription === "") {
+                        setModalErrorText("The description field can't be empty.")
+                        handleOpenModal()
+                    } else {
+                        if(newProject.image = "") {
+                            setModalErrorText("The image field can't be empty.")
+                            handleOpenModal()
+                        } else {
+
+                            console.log(newProject)
+    
+                            // Chiamata a axios
+    
+                            // Redirect a pagina campagna
+                            navigate(`/campagna/${newProject.projectId}`)
+                        }
+                        
+
+                    }
+
+                }
+
+
+            }
+
+        }
+    }
+
+    return (
+        <div>
+            <GridSpacer 
+                height="5vh" 
+            />
+
+            {/* Top buttons bar */}
+            <CampaignTopButtonsBar 
+                campaign={campaign} 
+            />
+            <Grid container spacing={2} justifyContent="center" style={{ paddingLeft: "5%", paddingRight: "5%" }}>
+                <Grid item xl={12} style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+                    <Link to="/" >
+                        <IconButton color="primary" aria-label="upload picture" component="label">
+
+                            <ArrowBackIosIcon />
+                        </IconButton>
+                    </Link>
+                    {
+                        userAddress === project.owner ?
+                        <Button variant="contained" component="label" onClick={saveProject}>
+                            Modifica
+
+                        </Button>
+                        :
+                        <span></span>
+                    }
+                </Grid>
+            </Grid>
+            <GridSpacer height="5vh" />
+
+
+
+            <Grid container spacing={2} style={{ paddingLeft: "10%", paddingRight: "10%", height: 350 }}>
+                <Grid item xl={6} style={{ width: "50%", height: "100%" }}>
+                    {
+                        updating ?
+                            <CampaignImageUpload setFile={setFile} setModalErrorText={setModalErrorText} handleOpenModal={handleOpenModal}/>
+                        :
+                        <Card style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                        <CardActionArea style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+                                <CardMedia
+                                    component="img"
+                                    image={project.image}
+                                />
+                        </CardActionArea>
+                    </Card>
+                    }
+                </Grid>
+
+
+                <Grid item xl={6} style={{ width: "50%", height: "100%" }}>
+                    <Card style={{ width: "100%", padding: 10, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-around", height: "100%" }}>
+                        
+                        {
+                            updating ?
+                            <TextField value={projectName} onChange={handleProjectNameChange} id="standard-basic" label="Project name" placeholder="Insert project name (required)" variant="standard" required />
+                            :
+                            <Typography variant="h5" gutterBottom>
+                                {project.name}
+                            </Typography>
+                        }
+
+                        {
+                            updating ? 
+                            <TextField
+                                value={project.target}
+                                disabled
+                                required
+                                id="outlined-number"
+                                label="Target"
+                                type="number"
+                                placeholder="Insert project target (required)"
+                                variant="standard"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            :
+                            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {Math.round( project.collectedFunds)} Algos
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {project.donatorsNumber} donators
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ width: '100%', mr: 1 }}>
+                                    <LinearProgress variant="determinate" value={project.collectedFunds * 100 / project.target} />
+                                </Box>
+                                <Box sx={{ minWidth: 35 }}>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {project.collectedFunds * 100 / project.target}% of {project.target} Algos
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        }
+
+                        {
+                            updating ?
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                                <DesktopDatePicker
+                                    label="Ending date"
+
+                                    inputFormat="MM/DD/YYYY"
+                                    value={projectEndingDate}
+                                    onChange={handleProjectEndingDateChange}
+                                    renderInput={(params) => <TextField {...params} variant="standard" required />}
+                                />
+                                </LocalizationProvider>                            
+                            :
+
+                            <Typography variant="body1" gutterBottom>
+                                Donation closes on {project.endingDate}
+                            </Typography>
+                        }
+                        
+                        {
+                            updating ?
+                                <span></span>
+                            :
+                            <Button variant="contained">Make contribution</Button>
+                        }
+                    </Card>
+                </Grid>
+            </Grid>
+
+            <GridSpacer height="2vh" />
+
+            <Grid container spacing={2} style={{ paddingLeft: "10%", paddingRight: "10%" }}>
+                <Grid item xl={12} style={{ width: "100%" }}>
+
+                    <Card style={{ width: "100%", padding: 10, boxSizing: "border-box" }}>
+                        { updating ? 
+                            <TextField
+                                required
+                                id="outlined-multiline-static"
+                                label="Description"
+                                multiline
+                                rows={10}
+                                placeholder="Insert project description (required)"
+                                value={projectDescription}
+                                onChange={handleProjectDescriptionChange}
+                                style={{ width: "100%" }}
+                            />
+                            :
+                            <Typography variant="body2" gutterBottom>
+                            {project.description}
+                          </Typography>
+                        
+                        }
+                    </Card>
+                </Grid>
+
+            </Grid>
+            <GridSpacer height="10vh" />
+
+
+
+            <Modal
+                open={open}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        ERROR
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        {modalErrorText}
+                    </Typography>
+                </Box>
+            </Modal>
+        </div>
+    )
+}

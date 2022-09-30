@@ -1,0 +1,6 @@
+@import '../../../generalStyles/variables.scss';
+
+#siteTitle {
+    text-transform: uppercase;
+    @extend .custom-h1; 
+}

@@ -2,21 +2,23 @@ const { v4: uuidv4 } = require('uuid')
 class Campaign {
     constructor(
         owner = "",
-        title = "", description = "", img = "",
-        targetAlgo = -1,
-        state = "deactivated",
+        name = "",
+        description = "",
+        image = "",
+        target = -1,
+        state = "active",
         endingDate = -1) {
 
         this.id = uuidv4();
         this.owner = owner;
 
-        this.title = title;
+        this.name = name;
         this.description = description;
-        this.img = img;
+        this.image = image;
 
-        this.collectedAlgo = 0;
-        this.targetAlgo = targetAlgo;
-        this.totalDonators = 0;
+        this.collectedFunds = 0;
+        this.target = target;
+        this.donatorsNumber = 0;
 
         this.transactions = {};
 
@@ -30,12 +32,12 @@ class Campaign {
         return this.id;
     }
 
-    set setTotalDonators(totalDonators) {
-        this.totalDonators = totalDonators;
+    set setDonatorsNumber(donatorsNumber) {
+        this.donatorsNumber = donatorsNumber;
     }
 
     incrementTotalDonators() {
-        this.totalDonators = ++this.totalDonators;
+        this.donatorsNumber = ++this.donatorsNumber;
     }
 }
 
