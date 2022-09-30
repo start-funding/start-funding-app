@@ -1,6 +1,3 @@
 frontend/package-lock.json
 
-smart-contract/venv/bin
-smart-contract/venv/lib
-smart-contract/venv/include
-smart-contract/venv/__pycache__
+smart-contract/__pycache__
