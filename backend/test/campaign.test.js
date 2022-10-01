@@ -6,7 +6,7 @@ const baseURL = "http://localhost:3000";
 const createNewCampaignRequest = async() => {
     const newPost = {
         owner: "dsaokpdasosapkdpaos",
-        title: "title",
+        name: "title",
         description: "description",
         img: "img",
         targetAlgo: 100,
@@ -30,15 +30,15 @@ describe('Testing Campaign', () => {
         expect(typeof campaign.id).toBe("string");
         expect(campaign.owner).toBe("");
 
-        expect(campaign.title).toBe("");
+        expect(campaign.name).toBe("");
         expect(campaign.description).toBe("");
-        expect(campaign.img).toBe("");
+        expect(campaign.image).toBe("");
 
-        expect(campaign.collectedAlgo).toBe(0);
-        expect(campaign.targetAlgo).toBe(-1);
-        expect(campaign.totalDonators).toBe(0);
+        expect(campaign.collectedFunds).toBe(0);
+        expect(campaign.target).toBe(-1);
+        expect(campaign.donatorsNumber).toBe(0);
 
-        expect(campaign.state).toBe("deactivated");
+        expect(campaign.state).toBe("active");
 
         expect(campaign.endingDate).toBe(-1);
         expect(campaign.created).toBeInstanceOf(Date);
@@ -58,7 +58,7 @@ describe('Testing Campaign', () => {
         expect(campaign.description).not.toBe("");
         expect(campaign.img).not.toBe("");
 
-        expect(campaign.collectedAlgo).toBe(0);
+        expect(campaign.collectedFunds).toBe(0);
         expect(campaign.targetAlgo).not.toBe(-1);
         expect(campaign.totalDonators).toBe(0);
 
