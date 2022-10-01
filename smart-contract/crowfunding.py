@@ -7,10 +7,16 @@ from beaker import (
     consts
 )
 
-class Crowfunding(Application):    
+class Crowfunding(Application):
+    db_id: Final[ApplicationStateValue] = ApplicationStateValue(
+        stack_type=TealType.bytes,
+        descr="related firebase campaign id",
+        static=True
+    )
+        
     is_closed: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.uint64,
-        descr="is already closed",
+        descr="smart contract status, 0 -> open / 1+ -> closed",
         default=Int(0),
     )
     
@@ -37,9 +43,18 @@ class Crowfunding(Application):
     def create(self):
         return self.initialize_application_state()
     
-    @opt_in
-    def opt_in(self):
-        return self.initialize_account_state()
+    # initialize "deposit_amount" related AccountStateValue
+    # @opt_in
+    # def opt_in(self):
+    #     return self.initialize_account_state()
+    
+    @external(authorize=Authorize.only(Global.creator_address()))
+    def set_db_id(self, db_id: abi.String, *, output: abi.String):       
+        """set related firebase campaign id"""
+        return Seq(
+            self.db_id.set(db_id.get()),
+            output.set(self.db_id),
+        )
     
     @external(authorize=Authorize.only(Global.creator_address()))
     def set_end_date(self, end_date: abi.Uint64, *, output: abi.Uint64):       
@@ -61,6 +76,11 @@ class Crowfunding(Application):
     def get_collected(self, *, output: abi.Uint64):       
         """return collected funds"""
         return output.set(Balance(self.address) / Int(1000000))
+    
+    @external(authorize=Authorize.only(Global.creator_address()))
+    def get_db_id(self, *, output: abi.String):       
+        """return collected funds"""
+        return output.set(self.db_id)
 
     @external
     def donate(self, donation: abi.PaymentTransaction, *, output: abi.Uint64):
