@@ -24,9 +24,12 @@ export default function HeaderMobileMenu(props) {
             <Divider />
             <List>
                 {props.navActive.map((item) => (
-                    <ListItem key={item.name}>
-                        <HeaderMenuButton navActive={props.navActive} setNavActive={props.setNavActive} navigationLinks={props.navigationLinks} item={item}/>
-                    </ListItem>
+                     item.show ?
+                        <ListItem key={item.name}>
+                            <HeaderMenuButton navActive={props.navActive} setNavActive={props.setNavActive} navigationLinks={props.navigationLinks} item={item}/>
+                        </ListItem>
+                    :
+                    <span key={item.name}></span>
                 ))}
             </List>
         </SwipeableDrawer>

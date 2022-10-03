@@ -1,0 +1,89 @@
+{
+    "name": "Crowfunding",
+    "methods": [{
+            "name": "claim",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "claim funds"
+        },
+        {
+            "name": "donate",
+            "args": [{
+                "type": "pay",
+                "name": "donation"
+            }],
+            "returns": {
+                "type": "uint64"
+            },
+            "desc": "fund a campaign"
+        },
+        {
+            "name": "get_collected",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "desc": "return collected funds"
+        },
+        {
+            "name": "get_db_id",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "desc": "return collected funds"
+        },
+        {
+            "name": "refund",
+            "args": [{
+                    "type": "account",
+                    "name": "account"
+                },
+                {
+                    "type": "uint64",
+                    "name": "amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "desc": "refund funds"
+        },
+        {
+            "name": "set_db_id",
+            "args": [{
+                "type": "string",
+                "name": "db_id"
+            }],
+            "returns": {
+                "type": "string"
+            },
+            "desc": "set related firebase campaign id"
+        },
+        {
+            "name": "set_end_date",
+            "args": [{
+                "type": "uint64",
+                "name": "end_date"
+            }],
+            "returns": {
+                "type": "uint64"
+            },
+            "desc": "set the end date (UNIX timestamp)"
+        },
+        {
+            "name": "set_target",
+            "args": [{
+                "type": "uint64",
+                "name": "target"
+            }],
+            "returns": {
+                "type": "uint64"
+            },
+            "desc": "set the target"
+        }
+    ],
+    "networks": {}
+}

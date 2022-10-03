@@ -9,6 +9,7 @@ import CampaignImageAndDataSection from "../../organisms/campaignImageAndDataSec
 import CampaignDescriptionSection from "../../organisms/campaignDescriptionSection/CampaignDescriptionSection";
 import Conf from '../../../conf/conf.json';
 import axios from "axios";
+import { Card, Grid, Typography } from "@mui/material";
 
 
 let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
@@ -44,6 +45,7 @@ export default function Campaign(props) {
                         setCampaign(res.data.data)
                         setCampaignDescription(res.data.data.description)
                         campaignUpdated.owner = res.data.data.owner;
+                        console.log(res.data.data)
                         break;
                     case 500:
                         alert("Error in campaign creation.")
@@ -107,6 +109,48 @@ export default function Campaign(props) {
                 editing={editing}
                 campaign={campaign}
             />
+
+            <GridSpacer 
+                height="2vh" 
+            />
+
+
+            {/* Donations */}
+            {
+                editing ?
+                    <span></span>
+                :
+                    <Grid container spacing={2} style={{ paddingLeft: "10%", paddingRight: "10%" }}>
+                        <Grid item xl={12} style={{ width: "100%" }}>
+                            <Card style={{ width: "100%", padding: 10, boxSizing: "border-box", display: "flex", flexDirection: "column" }}>
+                                <Typography variant="caption" style={{fontSize:"1em"}} >
+                                            DONATORS:
+                                </Typography>
+                                <ul>
+                                {
+                                    campaign.transactions != null && campaign.transactions.length > 0?
+                                        Object.keys(campaign.transactions).map(address => {
+                                            return(
+                                                    <li>
+                                                        <Typography variant="p">
+                                                            {address}: {campaign.transactions[address]} Algos
+                                                        </Typography>
+
+                                                    </li>
+                                            )
+                                        })
+                                    :
+                                    <Typography variant="p">
+                                        No donators to show.
+                                    </Typography>
+                                }
+                                </ul>
+
+                            </Card>
+                        </Grid>
+                    </Grid>
+               
+            }
             <GridSpacer 
                 height="10vh" 
             />

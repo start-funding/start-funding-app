@@ -80,6 +80,13 @@ export default function TransactionDialog(props) {
                 //note: "prova note",
                 suggestedParams: {...params}
             });
+            /*
+            const txn2 = algosdk.makeApplicationNoOpTxnFromObject({
+                from: address,
+                appIndex: //,
+                suggestedParams: {...params}
+            })
+            */
             
             // Use the AlgoSigner encoding library to make the transactions base64
             let txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn.toByte());
