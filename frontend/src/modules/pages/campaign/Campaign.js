@@ -128,10 +128,10 @@ export default function Campaign(props) {
                                 </Typography>
                                 <ul>
                                 {
-                                    campaign.transactions != null && campaign.transactions.length > 0?
+                                    campaign.transactions != null &&  Object.keys(campaign.transactions).length > 0?
                                         Object.keys(campaign.transactions).map(address => {
                                             return(
-                                                    <li>
+                                                    <li key={address}>
                                                         <Typography variant="p">
                                                             {address}: {campaign.transactions[address]} Algos
                                                         </Typography>
