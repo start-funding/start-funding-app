@@ -1,0 +1,191 @@
+      // window.AlgoSigner.send({
+        //                  ledger: 'TestNet',
+        //                  tx: signedTxs[0].blob
+        //                })
+        //                .then(d => {
+        //                 console.log(d)
+        //                })
+        //                .catch(err => {
+        //              console.log(err);
+        //                  })
+
+//         const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+//             const indexerServer = 'https://testnet-algorand.api.purestake.io/idx2';
+//             const token = { 'X-API-Key': 'B3SU4KcVKi94Jap2VXkK83xx38bsv95K5UZm2lab' }
+//             const port = '';
+      
+//             let algodClient = new algosdk.Algodv2(token, algodServer, port);
+//             let indexerClient = new algosdk.Indexer(token, indexerServer, port);
+//             //console.log("Check client health")
+//             // Health check
+
+//             (async () => {
+//                 console.log(await algodClient.status().do());
+//                 console.log( await algodClient.accountInformation("RTJKUIUP3P6F6WEZFXQSJD7CNRQGTFUHBO5WK5LTTTD7BMTES54B7X52BU").do())
+//               })().catch((e) => {
+//                 console.log(e);
+//               }); 
+//               let params = await algodClient.getTransactionParams().do();
+//               let account1_mnemonic = "agent fee energy clog license rabbit all milk puzzle select pill scrap hidden sock gate donate innocent smooth charge absorb slight reduce burden able width"
+//               let account = algosdk.mnemonicToSecretKey(account1_mnemonic);
+            
+//               let paymentTxn = algosdk.makePaymentTxnWithSuggestedParams("RTJKUIUP3P6F6WEZFXQSJD7CNRQGTFUHBO5WK5LTTTD7BMTES54B7X52BU","WQIOFPOHGAKAZA57BYFQDOLOU5FABZFDB34QFUUDEGW5CD2CV7Y5HTYD7Y", 10, undefined, undefined, params)
+//               let signetPaymentTrans = paymentTxn.signTxn(account.sk);
+//              // const signer = algosdk.makeBasicAccountTransactionSigner(algosdk.mnemonicToSecretKey(account1_mnemonic))
+//             let appArgs = [];
+//             appArgs.push(new Uint8Array(Buffer.from(signetPaymentTrans)));
+//               let txn = algosdk.makeApplicationNoOpTxn(account.addr, params, 114347003, appArgs);
+//             let signedTxn = txn.signTxn(account.sk);
+//             let txId = txn.txID().toString();
+//             await algodClient.sendRawTransaction(signedTxn).do();
+//             console.log("Aspetto trans")
+
+//             let transactionResponse = await algodClient.pendingTransactionInformation(txId).do();
+// console.log("Opted-in to app-id:",transactionResponse['txn']['txn']['apid'])
+
+        //props.campaign.contractAddress
+        // window.AlgoSigner.algod({
+        //     ledger: 'TestNet',
+        //     path: '/v2/transactions/params'
+        // })
+        // .then(txParams => {
+        //     /*
+        //     fee - integer fee per byte, in microAlgos. for a flat fee, set flatFee to true
+        //     * flatFee - bool optionally set this to true to specify fee as microalgos-per-txn
+        //     *       If true, txn fee may fall below the ALGORAND_MIN_TX_FEE
+        //     * firstRound - integer first protocol round on which this txn is valid
+        //     * lastRound - integer last protocol round on which this txn is valid
+        //     * genesisHash - string specifies hash genesis block of network in use
+        //     * genesisID - string specifies genesis ID of network in use
+        //     * 
+        //     * */
+        //     let params = {
+        //         flatFee: true,
+        //         firstRound: txParams['last-round'] +1,
+        //         lastRound: txParams['last-round'] +20,
+        //         genesisHash: txParams['genesis-hash'],
+        //         genesisID: txParams['genesis-id'],
+        //         fee: algosdk.ALGORAND_MIN_TX_FEE
+        //     }
+
+        //     const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+        //          from: "RTJKUIUP3P6F6WEZFXQSJD7CNRQGTFUHBO5WK5LTTTD7BMTES54B7X52BU",
+        //          to: "WQIOFPOHGAKAZA57BYFQDOLOU5FABZFDB34QFUUDEGW5CD2CV7Y5HTYD7Y",
+        //          amount: +1 * 1000000,
+        //          //note: "prova note",
+        //          suggestedParams: {...params}
+        //     });
+
+            
+            
+        //     let amount = algosdk.encodeUint64(1000000);
+        //     console.log(amount)
+        //     let appArgs = [];
+        //     appArgs.push(new Uint8Array(Buffer.from(amount)));
+
+        //     const txn2 = algosdk.makeApplicationCallTxnFromObject({
+        //         from: "RTJKUIUP3P6F6WEZFXQSJD7CNRQGTFUHBO5WK5LTTTD7BMTES54B7X52BU",
+        //         appIndex: 114347003,
+        //         suggestedParams: {...params}
+
+        //         //appArgs: appArgs
+        //     })
+        //     //txn2.appApprovalProgram = "ByACAAEmBQQVH3x1CWlzX2Nsb3NlZAZ0YXJnZXQIZW5kX2RhdGUFZGJfaWQxGyISQAE6NhoAgATxV3cmEkABHjYaAIAE5MPgEBJAAOs2GgCABJs"
+        //     //txn2.appClearProgram  = `#pragma version 7
+        //     //int 1
+        //     //`;
+        //     // Use the AlgoSigner encoding library to make the transactions base64
+        //     let txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn2.toByte());
+            
+        //     window.AlgoSigner.signTxn([{txn:txn_b64}])
+        //     .then(d => {
+        //         console.log(d)
+        //         window.AlgoSigner.send({
+        //             ledger: 'TestNet',
+        //             tx: d[0].blob
+        //           })
+        //           .then(d => {
+        //             //alert(`Created transaction with id: ${d.txId}`)
+        //             console.log(d)
+
+        //             // axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
+        //             //     addressFrom: address,
+        //             //     amount: amount
+        //             // })
+        //             // .then(res => {
+        //             //     switch(res.status) {
+        //             //         case 200:
+        //             //             props.handleCloseModal()
+                            
+        //             //             props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
+        //             //             alert(res.data.message)
+        //             //             break;
+        //             //         case 500:
+        //             //             alert(res.data.message)
+        //             //             break;
+        //             //     }                    
+        //             // })
+        //             // .catch(err => {
+        //             //     console.log(err);
+        //             //     alert(err)
+        //             // })
+        //         })
+        //           .catch(e => console.error(e));
+        //     })
+        //     .catch(e => console.error(e));
+            
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
+
+        // (async function () {
+
+        //     // Grab an account
+        //     // const acct = (await bkr.sandbox.getAccounts()).pop();
+        //     // if (acct === undefined) return;
+          
+        //     // Create a new client that will talk to our app
+        //     // Including a signer lets it worry about signing
+        //     // the app call transactions 
+        //     const appClient = new HelloBeaker({
+        //       client: bkr.ApplicationClient,
+        //       signer: acct.signer,
+        //       sender: acct.addr,
+        //     });
+          
+        //     // Deploy our app on chain (Only works if the ApplicationSpec was used to generate the client)
+        //     const [appId, appAddr, txId] = await appClient.create();
+        //     console.log(`Created app ${appId} with address ${appAddr} in tx ${txId}`);
+          
+        //     // Call the method by name, with named and typed arguments
+        //     const result = await appClient.hello({name: "Beaker"});
+        //     // Get a typed result back from our app call
+        //     console.log(result.value); // Hello, Beaker
+          
+        //   })();
+
+
+
+
+        // function _base64ToArrayBuffer(base64) {
+        //     var binary_string = window.atob(base64);
+        //     var len = binary_string.length;
+        //     var bytes = new Uint8Array(len);
+        //     for (var i = 0; i < len; i++) {
+        //         bytes[i] = binary_string.charCodeAt(i);
+        //     }
+        //     return bytes.buffer;
+        // }
+
+
+
+
+  // https://github.com/algorand/js-algorand-sdk/issues/433
+            // window.AlgoSigner.send({
+            //                  ledger: 'TestNet',
+            //                  tx: signedTxs[0].blob
+            //               }).then(d => {
+            //                 console.log("Dentro inviato")
+            //                 console.log(d)
+            //               }).catch(err => console.log(err))

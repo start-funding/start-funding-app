@@ -11,7 +11,9 @@ module.exports = function override(config) {
         "os": require.resolve("os-browserify"),
         "url": require.resolve("url")
     })
-    config.resolve.fallback = fallback;
+    config.resolve.fallback = {
+        fs: false
+    };
     config.plugins = (config.plugins || []).concat([
         new webpack.ProvidePlugin({
             process: 'process/browser',
