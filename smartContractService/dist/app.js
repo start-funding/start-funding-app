@@ -39,6 +39,7 @@ const express_1 = __importDefault(require("express"));
 const algosdk = __importStar(require("algosdk"));
 const crowfunding_client_1 = require("./crowfunding_client");
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
 const PORT = 3001;
 // algosdk.generateAccount();
 var account = {
@@ -70,6 +71,8 @@ const customSignerBackend = (transactions, indexesToSign) => __awaiter(void 0, v
 app.post('/api/v1/createCampaign', (req, res) => {
     try {
         console.log(req.body);
+        console.log("Creating..");
+        const { owner, target, endingDate } = req.body;
         let client = new algosdk.Algodv2({}, 'https://algosigner.api.purestake.io/testnet/algod', '');
         (function () {
             return __awaiter(this, void 0, void 0, function* () {
@@ -81,6 +84,12 @@ app.post('/api/v1/createCampaign', (req, res) => {
                 // Deploy our app on chain (Only works if the ApplicationSpec was used to generate the client)
                 const [appId, appAddr, txId] = yield appClient.create();
                 console.log(`Created app ${appId} with address ${appAddr} in tx ${txId}`);
+                const setted = yield appClient.setAll({
+                    db_id: "smart",
+                    end_date: endingDate,
+                    target: target,
+                    receiver: owner
+                });
                 res.status(201).json({
                     message: "Campaign created successfully!",
                     data: {

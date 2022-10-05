@@ -55,12 +55,16 @@ def demo():
         Crowfunding(), 
         signer=account.signer)
       
-    app_id, app_addr, txid = app_client.create(
-        db_id="ciao",
+    app_id, app_addr, txid = app_client.create()
+    print(f"- Created App with id: {app_id} and address addr: {app_addr} in tx: {txid}")
+    
+    result = app_client.call(Crowfunding.setAll, 
+        db_id="hello",
         end_date=1674601223,
         target=8,
         receiver= account.address)
-    print(f"- Created App with id: {app_id} and address addr: {app_addr} in tx: {txid}")
+    
+    print(f"- Setted all values")
     
     # result = app_client.call(Crowfunding.set_db_id, db_id="ciao")
     
@@ -125,11 +129,13 @@ def demo():
 if __name__ == "__main__":
     # import json
 
-    # crow = Crowfunding()
+    crow = Crowfunding()
     # print(crow.approval_program)
     # print(crow.clear_program)
     
-    # with open('abi.json', 'w') as f:
+    # with open('abiNew.json', 'w') as f:
     #     json.dump(crow.contract.dictify(), f)
-    # abi = json.dumps(crow.contract.dictify())
-    demo()
+    
+    crow.dump("/Users/alex/Projects/start-funding-app/smart-contract/compiled")
+    
+    # demo()
