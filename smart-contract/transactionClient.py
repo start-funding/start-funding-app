@@ -50,21 +50,28 @@ def demo():
     get_account_balance(account.address)
     print(f"- Account address: {account.address}")
     
-    app_client = ApplicationClient(client, Crowfunding(), signer=account.signer)
+    app_client = ApplicationClient(
+        client, 
+        Crowfunding(), 
+        signer=account.signer)
       
-    app_id, app_addr, txid = app_client.create()
+    app_id, app_addr, txid = app_client.create(
+        db_id="ciao",
+        end_date=1674601223,
+        target=8,
+        receiver= account.address)
     print(f"- Created App with id: {app_id} and address addr: {app_addr} in tx: {txid}")
     
-    result = app_client.call(Crowfunding.set_db_id, db_id="ciao")
+    # result = app_client.call(Crowfunding.set_db_id, db_id="ciao")
     
-    result = app_client.call(Crowfunding.get_db_id)
-    print(f"- Currrent db_id value: {result.return_value}")
+    # result = app_client.call(Crowfunding.get_db_id)
+    # print(f"- Currrent db_id value: {result.return_value}")
 
-    result = app_client.call(Crowfunding.set_end_date, end_date=1674601223)
-    print(f"- Currrent end_date value: {result.return_value}")
+    # result = app_client.call(Crowfunding.set_end_date, end_date=1674601223)
+    # print(f"- Currrent end_date value: {result.return_value}")
 
-    result = app_client.call(Crowfunding.set_target, target=8 * consts.algo)
-    print(f"- Currrent target value: {result.return_value}")
+    # result = app_client.call(Crowfunding.set_target, target=8 * consts.algo)
+    # print(f"- Currrent target value: {result.return_value}")
     
     get_account_balance(account.address)
     
@@ -116,13 +123,13 @@ def demo():
 
 
 if __name__ == "__main__":
-    import json
+    # import json
 
-    crow = Crowfunding()
-    print(crow.approval_program)
-    print(crow.clear_program)
+    # crow = Crowfunding()
+    # print(crow.approval_program)
+    # print(crow.clear_program)
     
-    with open('abi.json', 'w') as f:
-        json.dump(crow.contract.dictify(), f)
+    # with open('abi.json', 'w') as f:
+    #     json.dump(crow.contract.dictify(), f)
     # abi = json.dumps(crow.contract.dictify())
-    # demo()
+    demo()

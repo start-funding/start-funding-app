@@ -44,17 +44,33 @@ class Crowfunding(Application):
     #     stack_type=TealType.uint64,
     #     default=Int(0)
     #     )
+    
+    @external(authorize=Authorize.only(Global.creator_address()))
+    def createContract(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
+        return Seq(
+            self.initialize_application_state(),
+            self.db_id.set(db_id.get()),
+            self.end_date.set(end_date.get()),
+            self.target.set(target.get()),
+            self.receiver.set(receiver.get())
+        )
 
     @create
-    def create(self):
-        return self.initialize_application_state()
+    def create(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
+        return Seq(
+            self.initialize_application_state(),
+            self.db_id.set(db_id.get()),
+            self.end_date.set(end_date.get()),
+            self.target.set(target.get()),
+            self.receiver.set(receiver.get())
+        )
     
     # initialize "deposit_amount" related AccountStateValue
     # @opt_in
     # def opt_in(self):
     #     return self.initialize_account_state()
     
-    @external(authorize=Authorize.only(Global.creator_address()))
+    # @external(authorize=Authorize.only(Global.creator_address()))
     def set_db_id(self, db_id: abi.String, *, output: abi.String):       
         """set related firebase campaign id"""
         return Seq(
@@ -62,7 +78,7 @@ class Crowfunding(Application):
             output.set(self.db_id),
         )
     
-    @external(authorize=Authorize.only(Global.creator_address()))
+    # @external(authorize=Authorize.only(Global.creator_address()))
     def set_end_date(self, end_date: abi.Uint64, *, output: abi.Uint64):       
         """set the end date (UNIX timestamp)"""
         return Seq(
@@ -70,7 +86,7 @@ class Crowfunding(Application):
             output.set(self.end_date),
         )
     
-    @external(authorize=Authorize.only(Global.creator_address()))
+    # @external(authorize=Authorize.only(Global.creator_address()))
     def set_target(self, target: abi.Uint64, *, output: abi.Uint64):       
         """set the target"""
         return Seq(
@@ -90,7 +106,7 @@ class Crowfunding(Application):
         return output.set(self.db_id)
     
     
-    @external(authorize=Authorize.only(Global.creator_address()))
+    # @external(authorize=Authorize.only(Global.creator_address()))
     def set_receiver(self, receiver: abi.String, *, output: abi.String):       
         """set related firebase campaign id"""
         return Seq(
