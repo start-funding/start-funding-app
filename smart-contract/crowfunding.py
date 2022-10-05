@@ -33,6 +33,12 @@ class Crowfunding(Application):
         static=True
     )
     
+    receiver: Final[ApplicationStateValue] = ApplicationStateValue(
+        stack_type=TealType.bytes, 
+        key=Bytes("receiver"), 
+        default=Global.creator_address()
+    )
+    
     # save the total donated for each account
     # deposit_amount: AccountStateValue = AccountStateValue(
     #     stack_type=TealType.uint64,
@@ -77,13 +83,23 @@ class Crowfunding(Application):
         """return collected funds"""
         return output.set(Balance(self.address) / Int(1000000))
     
+    
     @external(authorize=Authorize.only(Global.creator_address()))
     def get_db_id(self, *, output: abi.String):       
         """return collected funds"""
         return output.set(self.db_id)
+    
+    
+    @external(authorize=Authorize.only(Global.creator_address()))
+    def set_receiver(self, receiver: abi.String, *, output: abi.String):       
+        """set related firebase campaign id"""
+        return Seq(
+            self.receiver.set(receiver.get()),
+            output.set(self.receiver),
+        )
 
     @external
-    def donate(self, donation: abi.PaymentTransaction, *, output: abi.Uint64):
+    def donate(self, donation: abi.PaymentTransaction, *, output: abi.String):
         """fund a campaign"""
         return Seq(
             Assert(
@@ -109,11 +125,13 @@ class Crowfunding(Application):
             # for debug
             # output.set(Balance(self.address) / Int(1000000)),
 
-            Approve()
+            output.set("200"),
+
+            # Approve()
         )
         
-    @external(authorize=Authorize.only(Global.creator_address()))
-    def claim(self):       
+    @external(authorize=Authorize.only(receiver))
+    def claim(self, *, output: abi.String):       
         """claim funds"""
         return Seq(
             # ensure target has been achieved
@@ -130,10 +148,12 @@ class Crowfunding(Application):
                     TxnField.close_remainder_to: Global.creator_address()
                 }
             ),
+            
+            output.set("200"),
         )
         
     @external(authorize=Authorize.only(Global.creator_address()))
-    def refund(self, account: abi.Account, amount: abi.Uint64):    
+    def refund(self, account: abi.Account, amount: abi.Uint64, *, output: abi.String):    
         """refund funds"""
         return Seq(
             Assert(
@@ -158,5 +178,6 @@ class Crowfunding(Application):
                 }
             ),
             
-            Approve()
+            output.set("200"),
+            # Approve()
         )
