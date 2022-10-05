@@ -46,24 +46,28 @@ class Crowfunding(Application):
     #     )
     
     @external(authorize=Authorize.only(Global.creator_address()))
-    def createContract(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
+    def setAll(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
         return Seq(
-            self.initialize_application_state(),
             self.db_id.set(db_id.get()),
             self.end_date.set(end_date.get()),
             self.target.set(target.get()),
             self.receiver.set(receiver.get())
         )
-
+        
     @create
-    def create(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
-        return Seq(
-            self.initialize_application_state(),
-            self.db_id.set(db_id.get()),
-            self.end_date.set(end_date.get()),
-            self.target.set(target.get()),
-            self.receiver.set(receiver.get())
-        )
+    def create(self):
+        return self.initialize_application_state()
+
+    # create() Funzionante con i parametri aggiuntivi!
+    # @create
+    # def create(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
+    #     return Seq(
+    #         self.initialize_application_state(),
+    #         self.db_id.set(db_id.get()),
+    #         self.end_date.set(end_date.get()),
+    #         self.target.set(target.get()),
+    #         self.receiver.set(receiver.get())
+    #     )
     
     # initialize "deposit_amount" related AccountStateValue
     # @opt_in
