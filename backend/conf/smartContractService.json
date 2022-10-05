@@ -1,0 +1,6 @@
+{
+    "api": {
+        "createCampaign": "http://localhost:3001/api/v1/createCampaign",
+        "refund": "http://localhost:3001/api/v1/refund"
+    }
+}

@@ -4,6 +4,8 @@ const { FieldValue, Timestamp } = require('firebase-admin/firestore');
 var fs = require('fs');
 const { dateFormatter, timeStampFromInt } = require('../utils/utils')
 const { pinFileToIPFS } = require('../services/pinata/pinata.js')
+const axios = require('axios');
+const ApiData = require('../conf/smartContractService.json')
 
 const getAll = async(req, res) => {
     // Fetch data from db
@@ -74,32 +76,62 @@ const create = async(req, res) => {
             endingDate
         } = req.body;
 
-        var fileStream = fs.createReadStream(req.files[0].path)
-        const imageHash = await pinFileToIPFS(fileStream, "prova", owner)
+        console.log("Dentro a create")
+        console.log(ApiData.api.createCampaign)
+        console.log(axios)
+        
+        // Prima creo la campagna
+        axios.post(`${ApiData.api.createCampaign}`, {
+            owner: owner,
+            target: target,
+            endingDate: endingDate
+        })
+            .then(async (resp) => {
+                console.log("Dopo la richiesta")
+                // Campaign posted on blockchain
+                if (resp.status === 201) {
+                    console.log(resp.data)
+                    var fileStream = fs.createReadStream(req.files[0].path)
+                    const imageHash = await pinFileToIPFS(fileStream, "prova", owner)
 
-        // TODO: add validation to params
-        new_campaign = new Campaign(
-            owner,
-            name,
-            description,
-            `https://gateway.pinata.cloud/ipfs/${imageHash}`,
-            parseInt(target),
-            "active",
-            timeStampFromInt(endingDate)
-        );
+                    // TODO: add validation to params
+                    new_campaign = new Campaign(
+                        owner,
+                        name,
+                        description,
+                        `https://gateway.pinata.cloud/ipfs/${imageHash}`,
+                        parseInt(target),
+                        "active",
+                        timeStampFromInt(endingDate),
+                        resp.data.data.appId,
+                        resp.data.data.appAddr
+                    );
 
-        //Saving new campaign inside db
-        const campaignRef = db.collection('campaigns').doc(`${new_campaign.id}`);
-        const result = await campaignRef.set({
-            ...new_campaign
-        });
+                    //Saving new campaign inside db
+                    const campaignRef = db.collection('campaigns').doc(`${new_campaign.id}`);
+                    const result = await campaignRef.set({
+                        ...new_campaign
+                    });
 
-        res.status(201).json({
-            message: "Campaign created successfully!",
-            data: new_campaign,
-            error: null
-        });
+                    res.status(201).json({
+                        message: "Campaign created successfully!",
+                        data: new_campaign,
+                        error: null
+                    });
+                } else {
+                    return res.status(500).json({
+                        data: null,
+                        error: "error prova",
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             data: null,
             error: error,
