@@ -7,7 +7,9 @@ class Campaign {
         image = "",
         target = -1,
         state = "active",
-        endingDate = -1) {
+        endingDate = -1, 
+        appId="", 
+        appAddress="") {
 
         this.id = uuidv4();
         this.owner = owner;
@@ -26,6 +28,8 @@ class Campaign {
 
         this.endingDate = endingDate;
         this.created = new Date;
+        this.appId = appId;
+        this.appAddress = appAddress;
     }
 
     get getId() {
