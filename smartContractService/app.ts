@@ -82,6 +82,50 @@ app.post('/api/v1/createCampaign', (req: Request, res: Response) => {
         });
     }
   });
+
+  app.post('/api/v1/refund', async (req: Request, res: Response) => {
+    try {
+
+        // let donations = req.body.donations;
+        // let donators = Object.keys(donations);
+
+        // let client = new algosdk.Algodv2({},
+        //     'https://algosigner.api.purestake.io/testnet/algod',
+        //     '',
+        // );
+
+        // const appClient = new Crowfunding({
+        //     client: client,
+        //     signer: customSignerBackend,
+        //     sender: account.addr,
+        //     appId: req.body.appId
+        // });
+    
+   
+
+        // const results = await Promise.all(
+        //     donators.map(async (donator) => {
+        //         return await appClient.refund({
+        //             account: donator,
+        //             amount: BigInt(donations[donator])
+        //         });
+        //     })
+        // )
+        res.status(200).json({
+            message: "Users refunded.",
+            data: null,
+            error: null
+        });
+
+    } catch(err) {
+        console.log(err)
+        res.status(500).json({
+            message: "Error.",
+            data: null,
+            error: err
+        });
+    }
+  })
   
   app.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);

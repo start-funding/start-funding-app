@@ -81,7 +81,7 @@ const create = async (req, res) => {
         console.log(axios)
         
         // Prima creo la campagna
-        axios.post(`http://localhost:3001/api/v1/createCampaign`, {
+        axios.post(`${ApiData.api.createCampaign}`, {
             owner: owner,
             target: target,
             endingDate: endingDate
