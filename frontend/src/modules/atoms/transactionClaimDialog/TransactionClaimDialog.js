@@ -57,34 +57,36 @@ export default function TransactionClaimDialog(props) {
               
                 // Call the method by name, with named and typed arguments
                 //const result = await appClient.get_collected();
-    
-                const bootstrapResult = await appClient.claim();
-                // Get a typed result back from our app call
-                console.log(bootstrapResult); // Hello, Beaker
+                try {
+                    const bootstrapResult = await appClient.claim();
+                    // Get a typed result back from our app call
+                    console.log(bootstrapResult); // Hello, Beaker
+                    // Ci vorrebbe un controllo, ma su quale campo?
+                    axios.post(`${api}${Conf.backend.endpoints.claim}`, {
+                        id: props.campaign.id
+                    })
+                    .then(res => {
+                        switch(res.status) {
+                            case 200:
+                            
+                                props.setCampaignState("success")
+                                alert(res.data.message)
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }                    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert(err)
+                    })
+
+                } catch(err) {
+                    alert(err)
+                }
 
                 
-                // Ci vorrebbe un controllo, ma su quale campo?
-                // axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
-                //     addressFrom: address,
-                //     amount: amount
-                // })
-                // .then(res => {
-                //     switch(res.status) {
-                //         case 200:
-                //             props.handleCloseModal()
-                        
-                //             props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
-                //             alert(res.data.message)
-                //             break;
-                //         case 500:
-                //             alert(res.data.message)
-                //             break;
-                //     }                    
-                // })
-                // .catch(err => {
-                //     console.log(err);
-                //     alert(err)
-                // })
               })();
             
 

@@ -159,6 +159,7 @@ export default function CampaignImageAndDataSection(props) {
                                 <CampaignClaimButton 
                                     algoAddresses={props.algoAddresses} 
                                     campaign={props.campaign}
+                                    setCampaignState={props.setCampaignState}
                                 />
                                 :
                                 <span></span>

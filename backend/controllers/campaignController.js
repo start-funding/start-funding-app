@@ -428,4 +428,28 @@ const stats = async (req, res) => {
     }
 }
 
-module.exports = { getAll, get, create, fund, update, deleteCampaign, filterCampaigns, top12, stats };
+const claim = async (req, res) => {
+    try {
+        const {
+            id
+        } = req.body;
+
+        const campaignRef = db.collection('campaigns').doc(`${id}`);
+        
+        await campaignRef.update({ state: "success" })
+
+            res.status(200).json({
+                message: "State updated.",
+                data: null,
+                error: null
+            });
+
+    } catch (error) {
+        return res.status(500).json({
+            data: null,
+            error: error,
+        });
+    }
+}
+
+module.exports = { getAll, get, create, fund, update, deleteCampaign, filterCampaigns, top12, stats, claim };
