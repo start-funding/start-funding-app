@@ -68,7 +68,8 @@ export default function TransactionClaimDialog(props) {
                     .then(res => {
                         switch(res.status) {
                             case 200:
-                            
+                                props.handleCloseModal();
+
                                 props.setCampaignState("success")
                                 alert(res.data.message)
                                 break;
@@ -83,7 +84,29 @@ export default function TransactionClaimDialog(props) {
                     })
 
                 } catch(err) {
-                    alert(err)
+                    console.log(err)
+
+                    axios.post(`${api}${Conf.backend.endpoints.claim}`, {
+                        id: props.campaign.id
+                    })
+                    .then(res => {
+                        switch(res.status) {
+                            case 200:
+                                props.handleCloseModal();
+                                props.setCampaignState("success")
+                                alert(res.data.message)
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }                    
+                    })
+                    .catch(err2 => {
+                        console.log(err2);
+                        alert(err2)
+                    })
+
+                    
                 }
 
                 
