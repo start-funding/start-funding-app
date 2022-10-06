@@ -78,7 +78,7 @@ app.post('/api/v1/createCampaign', (req: Request, res: Response) => {
             const setted = await appClient.setAll({
                 db_id:id,
                 end_date: BigInt(endingDate),
-                target: BigInt(target),
+                target: BigInt(target * 1000000),
                 receiver: owner
             });
     
