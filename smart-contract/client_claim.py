@@ -72,6 +72,7 @@ def demo():
     get_account_balance(account.address)
     
     result = new_app_client.call(Crowfunding.claim)
+    print(result)
     print("# Claimed!" + "\n")
     
     result = app_client.call(Crowfunding.get_collected)

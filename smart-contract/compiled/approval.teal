@@ -1,12 +1,12 @@
 #pragma version 7
 intcblock 0 1
-bytecblock 0x151f7c75 0x69735f636c6f736564 0x7265636569766572 0x746172676574 0x0003323030 0x656e645f64617465 0x64625f6964
+bytecblock 0x69735f636c6f736564 0x151f7c75 0x7265636569766572 0x746172676574 0x656e645f64617465 0x64625f6964 0x0003323030
 txn NumAppArgs
 intc_0 // 0
 ==
 bnz main_l14
 txna ApplicationArgs 0
-pushbytes 0xbfd81b89 // "claim()string"
+pushbytes 0xf1577726 // "claim()void"
 ==
 bnz main_l13
 txna ApplicationArgs 0
@@ -40,19 +40,19 @@ intc_0 // 0
 &&
 assert
 txna ApplicationArgs 1
-store 12
+store 11
 txna ApplicationArgs 2
 btoi
-store 13
+store 12
 txna ApplicationArgs 3
 btoi
-store 14
+store 13
 txna ApplicationArgs 4
-store 15
+store 14
+load 11
 load 12
 load 13
 load 14
-load 15
 callsub setAll_10
 intc_1 // 1
 return
@@ -68,16 +68,16 @@ assert
 txna ApplicationArgs 1
 intc_0 // 0
 getbyte
-store 7
+store 6
 txna ApplicationArgs 2
 btoi
-store 8
+store 7
+load 6
 load 7
-load 8
 callsub refund_9
-store 9
-bytec_0 // 0x151f7c75
-load 9
+store 8
+bytec_1 // 0x151f7c75
+load 8
 concat
 log
 intc_1 // 1
@@ -92,9 +92,9 @@ intc_0 // 0
 &&
 assert
 callsub getdbid_8
-store 5
-bytec_0 // 0x151f7c75
-load 5
+store 4
+bytec_1 // 0x151f7c75
+load 4
 concat
 log
 intc_1 // 1
@@ -109,9 +109,9 @@ intc_0 // 0
 &&
 assert
 callsub getcollected_7
-store 4
-bytec_0 // 0x151f7c75
-load 4
+store 3
+bytec_1 // 0x151f7c75
+load 3
 itob
 concat
 log
@@ -129,17 +129,17 @@ assert
 txn GroupIndex
 intc_1 // 1
 -
-store 1
-load 1
+store 0
+load 0
 gtxns TypeEnum
 intc_1 // pay
 ==
 assert
-load 1
+load 0
 callsub donate_6
-store 2
-bytec_0 // 0x151f7c75
-load 2
+store 1
+bytec_1 // 0x151f7c75
+load 1
 concat
 log
 intc_1 // 1
@@ -154,11 +154,6 @@ intc_0 // 0
 &&
 assert
 callsub claim_5
-store 0
-bytec_0 // 0x151f7c75
-load 0
-concat
-log
 intc_1 // 1
 return
 main_l14:
@@ -184,7 +179,7 @@ retsub
 
 // create
 create_1:
-bytec_1 // "is_closed"
+bytec_0 // "is_closed"
 intc_0 // 0
 app_global_put
 bytec_2 // "receiver"
@@ -223,8 +218,8 @@ bytec_3 // "target"
 app_global_get
 >=
 assert
-bytec_1 // "is_closed"
-bytec_1 // "is_closed"
+bytec_0 // "is_closed"
+bytec_0 // "is_closed"
 app_global_get
 intc_1 // 1
 +
@@ -238,48 +233,47 @@ bytec_2 // "receiver"
 app_global_get
 itxn_field CloseRemainderTo
 itxn_submit
-bytec 4 // 0x0003323030
 retsub
 
 // donate
 donate_6:
-store 3
-bytec_1 // "is_closed"
+store 2
+bytec_0 // "is_closed"
 app_global_get
 intc_0 // 0
 ==
 global LatestTimestamp
-bytec 5 // "end_date"
+bytec 4 // "end_date"
 app_global_get
 <=
 &&
-load 3
+load 2
 gtxns TypeEnum
 intc_1 // pay
 ==
 &&
-load 3
+load 2
 gtxns Receiver
 global CurrentApplicationAddress
 ==
 &&
-load 3
+load 2
 gtxns CloseRemainderTo
 global ZeroAddress
 ==
 &&
-load 3
+load 2
 gtxns Fee
 pushint 1000 // 1000
 <=
 &&
-load 3
+load 2
 gtxns RekeyTo
 global ZeroAddress
 ==
 &&
 assert
-bytec 4 // 0x0003323030
+bytec 6 // 0x0003323030
 retsub
 
 // get_collected
@@ -296,28 +290,28 @@ txn Sender
 callsub authonly_2
 // unauthorized
 assert
-bytec 6 // "db_id"
+bytec 5 // "db_id"
 app_global_get
-store 6
-load 6
+store 5
+load 5
 len
 itob
 extract 6 0
-load 6
+load 5
 concat
-store 6
-load 6
+store 5
+load 5
 retsub
 
 // refund
 refund_9:
-store 11
 store 10
+store 9
 txn Sender
 callsub authonly_4
 // unauthorized
 assert
-bytec_1 // "is_closed"
+bytec_0 // "is_closed"
 app_global_get
 intc_0 // 0
 ==
@@ -331,64 +325,64 @@ assert
 itxn_begin
 intc_1 // pay
 itxn_field TypeEnum
-load 10
+load 9
 txnas Accounts
 itxn_field Receiver
-load 11
+load 10
 global MinBalance
 -
 txn Fee
 -
 itxn_field Amount
 itxn_submit
-bytec 4 // 0x0003323030
+bytec 6 // 0x0003323030
 retsub
 
 // setAll
 setAll_10:
-store 19
 store 18
 store 17
 store 16
+store 15
 txn Sender
 callsub authonly_0
 // unauthorized
 assert
 intc_0 // 0
-bytec 6 // "db_id"
+bytec 5 // "db_id"
 app_global_get_ex
-store 21
 store 20
-load 21
+store 19
+load 20
 !
 assert
-bytec 6 // "db_id"
-load 16
+bytec 5 // "db_id"
+load 15
 extract 2 0
 app_global_put
 intc_0 // 0
-bytec 5 // "end_date"
+bytec 4 // "end_date"
 app_global_get_ex
-store 23
 store 22
-load 23
+store 21
+load 22
 !
 assert
-bytec 5 // "end_date"
-load 17
+bytec 4 // "end_date"
+load 16
 app_global_put
 intc_0 // 0
 bytec_3 // "target"
 app_global_get_ex
-store 25
 store 24
-load 25
+store 23
+load 24
 !
 assert
 bytec_3 // "target"
-load 18
+load 17
 app_global_put
 bytec_2 // "receiver"
-load 19
+load 18
 app_global_put
 retsub

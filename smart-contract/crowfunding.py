@@ -151,7 +151,7 @@ class Crowfunding(Application):
         )
         
     @external(authorize=Authorize.only(receiver))
-    def claim(self, *, output: abi.String):       
+    def claim(self):       
         """claim funds"""
         return Seq(
             # ensure target has been achieved
@@ -167,8 +167,6 @@ class Crowfunding(Application):
                     TxnField.close_remainder_to: self.receiver
                 }
             ),
-            
-            output.set("200"),
         )
         
     @external(authorize=Authorize.only(Global.creator_address()))
