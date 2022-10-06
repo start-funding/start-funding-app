@@ -46,7 +46,7 @@ class Crowfunding(Application):
     #     )
     
     @external(authorize=Authorize.only(Global.creator_address()))
-    def setAll(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
+    def setAll(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.Address):
         return Seq(
             self.db_id.set(db_id.get()),
             self.end_date.set(end_date.get()),
@@ -163,9 +163,8 @@ class Crowfunding(Application):
             InnerTxnBuilder.Execute(
                 {
                     TxnField.type_enum: TxnType.Payment,
-                    TxnField.receiver: Global.creator_address(),
                     TxnField.amount: Int(0),
-                    TxnField.close_remainder_to: Global.creator_address()
+                    TxnField.close_remainder_to: self.receiver
                 }
             ),
             

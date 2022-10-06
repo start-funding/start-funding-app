@@ -1,6 +1,6 @@
 #pragma version 7
 intcblock 0 1
-bytecblock 0x151f7c75 0x69735f636c6f736564 0x746172676574 0x7265636569766572 0x0003323030 0x656e645f64617465 0x64625f6964
+bytecblock 0x151f7c75 0x69735f636c6f736564 0x7265636569766572 0x746172676574 0x0003323030 0x656e645f64617465 0x64625f6964
 txn NumAppArgs
 intc_0 // 0
 ==
@@ -26,7 +26,7 @@ pushbytes 0xbde54306 // "refund(account,uint64)string"
 ==
 bnz main_l9
 txna ApplicationArgs 0
-pushbytes 0x68693733 // "setAll(string,uint64,uint64,string)void"
+pushbytes 0x2e1778a7 // "setAll(string,uint64,uint64,address)void"
 ==
 bnz main_l8
 err
@@ -187,7 +187,7 @@ create_1:
 bytec_1 // "is_closed"
 intc_0 // 0
 app_global_put
-bytec_3 // "receiver"
+bytec_2 // "receiver"
 global CreatorAddress
 app_global_put
 retsub
@@ -200,7 +200,7 @@ retsub
 
 // auth_only
 authonly_3:
-bytec_3 // "receiver"
+bytec_2 // "receiver"
 app_global_get
 ==
 retsub
@@ -219,7 +219,7 @@ callsub authonly_3
 assert
 global CurrentApplicationAddress
 balance
-bytec_2 // "target"
+bytec_3 // "target"
 app_global_get
 >=
 assert
@@ -232,11 +232,10 @@ app_global_put
 itxn_begin
 intc_1 // pay
 itxn_field TypeEnum
-global CreatorAddress
-itxn_field Receiver
 intc_0 // 0
 itxn_field Amount
-global CreatorAddress
+bytec_2 // "receiver"
+app_global_get
 itxn_field CloseRemainderTo
 itxn_submit
 bytec 4 // 0x0003323030
@@ -324,7 +323,7 @@ intc_0 // 0
 ==
 global CurrentApplicationAddress
 balance
-bytec_2 // "target"
+bytec_3 // "target"
 app_global_get
 <
 &&
@@ -379,18 +378,17 @@ bytec 5 // "end_date"
 load 17
 app_global_put
 intc_0 // 0
-bytec_2 // "target"
+bytec_3 // "target"
 app_global_get_ex
 store 25
 store 24
 load 25
 !
 assert
-bytec_2 // "target"
+bytec_3 // "target"
 load 18
 app_global_put
-bytec_3 // "receiver"
+bytec_2 // "receiver"
 load 19
-extract 2 0
 app_global_put
 retsub
