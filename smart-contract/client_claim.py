@@ -30,16 +30,14 @@ def demo():
     app_id, app_addr, txid = app_client.create()
     print(f"- Created App with id: {app_id} and address addr: {app_addr}")
     
-    result = app_client.call(Crowfunding.set_db_id, db_id="ciao")
+    result = app_client.call(Crowfunding.setAll, 
+        db_id="hello",
+        end_date=1674601223,
+        target=8,
+        receiver= account.address)
     
-    result = app_client.call(Crowfunding.get_db_id)
-    print(f"- Currrent db_id value: {result.return_value}")
-
-    result = app_client.call(Crowfunding.set_end_date, end_date=1674601223)
-    print(f"- Currrent end_date value: {result.return_value}")
-
-    result = app_client.call(Crowfunding.set_target, target=4 * consts.algo)
-    print(f"- Currrent target value: {result.return_value}")
+    print(f"- Setted all values")
+    
     
     get_account_balance(account.address)
 
