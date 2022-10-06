@@ -79,9 +79,21 @@ const create = async (req, res) => {
         console.log("Dentro a create")
         console.log(ApiData.api.createCampaign)
         console.log(axios)
-        
+ 
+         let new_campaign = new Campaign(
+            owner,
+            name,
+            description,
+            "",
+            parseInt(target),
+            "active",
+            timeStampFromInt(endingDate),
+           "",
+           ""
+        );
         // Prima creo la campagna
         axios.post(`${ApiData.api.createCampaign}`, {
+            id: new_campaign.id,
             owner: owner,
             target: target,
             endingDate: endingDate
@@ -95,17 +107,9 @@ const create = async (req, res) => {
                     const imageHash = await pinFileToIPFS(fileStream, "prova", owner)
 
                     // TODO: add validation to params
-                    new_campaign = new Campaign(
-                        owner,
-                        name,
-                        description,
-                        `https://gateway.pinata.cloud/ipfs/${imageHash}`,
-                        parseInt(target),
-                        "active",
-                        timeStampFromInt(endingDate),
-                        resp.data.data.appId,
-                        resp.data.data.appAddr
-                    );
+                   new_campaign.image = `https://gateway.pinata.cloud/ipfs/${imageHash}`;
+                   new_campaign.appId = resp.data.data.appId;
+                   new_campaign.appAddress = resp.data.data.appAddr;
 
                     //Saving new campaign inside db
                     const campaignRef = db.collection('campaigns').doc(`${new_campaign.id}`);
