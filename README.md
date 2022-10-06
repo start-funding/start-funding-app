@@ -2,9 +2,8 @@
 ### The Algorand crowdfunding platform
 by [Tomàs Daniel Avila Visintin](https://github.com/iltommi1995) and [Alex Calabrese](https://github.com/alexcalabrese)
 <div>
-  <img src="https://gateway.pinata.cloud/ipfs/QmaqGvUyRvvijp78dqiBEc66ZcepGhd2CKDsNhUr2gAh3i"  />
+  <img src="https://gateway.pinata.cloud/ipfs/QmaqGvUyRvvijp78dqiBEc66ZcepGhd2CKDsNhUr2gAh3i" height="200px" />
 </div>
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 Start Funding app is the prototype for a decentralized crowdfunding platform, based on Algorand blockchain.
 Only some basic functions are currently available, but future developments will come. 
