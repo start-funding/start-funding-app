@@ -46,50 +46,71 @@ export default function TransactionClaimDialog(props) {
             'https://algosigner.api.purestake.io/testnet/algod',
             '',
             );
-            //let address = "RTJKUIUP3P6F6WEZFXQSJD7CNRQGTFUHBO5WK5LTTTD7BMTES54B7X52BU";
-            let appAddress = "WQIOFPOHGAKAZA57BYFQDOLOU5FABZFDB34QFUUDEGW5CD2CV7Y5HTYD7Y"; 
+            
             (async function () {
                 const appClient = new Crowfunding({
                   client: client,
                   signer: customSigner,
                   sender: address,
-                  appId: props.campaign.appId // Sostituire con props.campaign.appId 114347003
+                  appId: props.campaign.appId, // Sostituire con props.campaign.appId 114347003
                 });
               
                 // Call the method by name, with named and typed arguments
                 //const result = await appClient.get_collected();
-    
-                const bootstrapResult = await appClient.claim();
-                // Get a typed result back from our app call
-                console.log(bootstrapResult); // Hello, Beaker
+                try {
+                    const bootstrapResult = await appClient.claim();
+                    // Get a typed result back from our app call
+                    console.log(bootstrapResult); // Hello, Beaker
+                    // Ci vorrebbe un controllo, ma su quale campo?
+                    axios.post(`${api}${Conf.backend.endpoints.claim}`, {
+                        id: props.campaign.id
+                    })
+                    .then(res => {
+                        switch(res.status) {
+                            case 200:
+                                props.handleCloseModal();
+
+                                props.setCampaignState("success")
+                                alert(res.data.message)
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }                    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert(err)
+                    })
+
+                } catch(err) {
+                    console.log(err)
+
+                    axios.post(`${api}${Conf.backend.endpoints.claim}`, {
+                        id: props.campaign.id
+                    })
+                    .then(res => {
+                        switch(res.status) {
+                            case 200:
+                                props.handleCloseModal();
+                                props.setCampaignState("success")
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }                    
+                    })
+                    .catch(err2 => {
+                        console.log(err2);
+                    })
+
+                    
+                }
 
                 
-                // Ci vorrebbe un controllo, ma su quale campo?
-                // axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
-                //     addressFrom: address,
-                //     amount: amount
-                // })
-                // .then(res => {
-                //     switch(res.status) {
-                //         case 200:
-                //             props.handleCloseModal()
-                        
-                //             props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
-                //             alert(res.data.message)
-                //             break;
-                //         case 500:
-                //             alert(res.data.message)
-                //             break;
-                //     }                    
-                // })
-                // .catch(err => {
-                //     console.log(err);
-                //     alert(err)
-                // })
               })();
             
-
-        
+     
     }
 
     return(

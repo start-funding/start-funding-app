@@ -26,6 +26,7 @@ export default function CampaignClaimButton(props) {
                  algoAddresses={props.algoAddresses}
                  buttonText={"Claim funds"}
                  campaign={props.campaign}
+                 setCampaignState={props.setCampaignState}
             />
         </div>
     )

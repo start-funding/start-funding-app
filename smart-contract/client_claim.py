@@ -1,4 +1,3 @@
-from multiprocessing.spawn import prepare
 from pyteal import Balance, Global
 from crowfunding import Crowfunding
 from beaker.client import ApplicationClient, LogicException

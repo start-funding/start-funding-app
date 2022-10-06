@@ -155,10 +155,11 @@ export default function CampaignImageAndDataSection(props) {
                             props.createCampaignPage ?
                             <span></span>
                             :
-                            props.algoAddresses.includes(props.campaign.owner) && !props.editing  && props.campaign.state === "active" && props.algoSignerActive ?
+                            props.algoAddresses.includes(props.campaign.owner) && !props.editing  && props.campaign.state === "active" && props.algoSignerActive   ?
                                 <CampaignClaimButton 
                                     algoAddresses={props.algoAddresses} 
                                     campaign={props.campaign}
+                                    setCampaignState={props.setCampaignState}
                                 />
                                 :
                                 <span></span>

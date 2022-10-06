@@ -52,13 +52,17 @@ app.post('/api/v1/createCampaign', (req: Request, res: Response) => {
         const {
             owner,
             target,
-            endingDate
+            endingDate,
+            id
         } = req.body
+        console.log(typeof endingDate)
+        console.log(typeof BigInt(endingDate))
         
         let client = new algosdk.Algodv2({},
             'https://algosigner.api.purestake.io/testnet/algod',
             '',
         );
+
     
         (async function() {
             const appClient = new Crowfunding({
@@ -72,9 +76,9 @@ app.post('/api/v1/createCampaign', (req: Request, res: Response) => {
             console.log(`Created app ${appId} with address ${appAddr} in tx ${txId}`);
 
             const setted = await appClient.setAll({
-                db_id:"smart",
-                end_date: endingDate,
-                target: target,
+                db_id:id,
+                end_date: BigInt(endingDate),
+                target: BigInt(target * 1000000),
                 receiver: owner
             });
     
@@ -126,7 +130,7 @@ app.post('/api/v1/createCampaign', (req: Request, res: Response) => {
         //     })
         // )
         res.status(200).json({
-            message: "Users refunded.",
+        message: "Users refunded.",
             data: null,
             error: null
         });

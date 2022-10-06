@@ -40,3 +40,5 @@ app.get('/top12', campaignController.top12)
 
 // Stats
 app.get('/stats', campaignController.stats)
+
+app.post('/claim', campaignController.claim)

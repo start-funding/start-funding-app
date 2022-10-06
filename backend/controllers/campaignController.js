@@ -4,7 +4,7 @@ const { FieldValue, Timestamp } = require('firebase-admin/firestore');
 var fs = require('fs');
 const { dateFormatter, timeStampFromInt } = require('../utils/utils')
 const { pinFileToIPFS } = require('../services/pinata/pinata.js')
-const axios = require('axios');
+const axios = require('axios').default;
 const ApiData = require('../conf/smartContractService.json')
 
 const getAll = async(req, res) => {
@@ -79,9 +79,21 @@ const create = async(req, res) => {
         console.log("Dentro a create")
         console.log(ApiData.api.createCampaign)
         console.log(axios)
-        
+ 
+         let new_campaign = new Campaign(
+            owner,
+            name,
+            description,
+            "",
+            parseInt(target),
+            "active",
+            timeStampFromInt(endingDate),
+           "",
+           ""
+        );
         // Prima creo la campagna
         axios.post(`${ApiData.api.createCampaign}`, {
+            id: new_campaign.id,
             owner: owner,
             target: target,
             endingDate: endingDate
@@ -95,17 +107,9 @@ const create = async(req, res) => {
                     const imageHash = await pinFileToIPFS(fileStream, "prova", owner)
 
                     // TODO: add validation to params
-                    new_campaign = new Campaign(
-                        owner,
-                        name,
-                        description,
-                        `https://gateway.pinata.cloud/ipfs/${imageHash}`,
-                        parseInt(target),
-                        "active",
-                        timeStampFromInt(endingDate),
-                        resp.data.data.appId,
-                        resp.data.data.appAddr
-                    );
+                   new_campaign.image = `https://gateway.pinata.cloud/ipfs/${imageHash}`;
+                   new_campaign.appId = resp.data.data.appId;
+                   new_campaign.appAddress = resp.data.data.appAddr;
 
                     //Saving new campaign inside db
                     const campaignRef = db.collection('campaigns').doc(`${new_campaign.id}`);
@@ -424,4 +428,28 @@ const stats = async(req, res) => {
     }
 }
 
-module.exports = { getAll, get, create, fund, update, deleteCampaign, filterCampaigns, top12, stats };
+const claim = async (req, res) => {
+    try {
+        const {
+            id
+        } = req.body;
+
+        const campaignRef = db.collection('campaigns').doc(`${id}`);
+        
+        await campaignRef.update({ state: "success" })
+
+            res.status(200).json({
+                message: "State updated.",
+                data: null,
+                error: null
+            });
+
+    } catch (error) {
+        return res.status(500).json({
+            data: null,
+            error: error,
+        });
+    }
+}
+
+module.exports = { getAll, get, create, fund, update, deleteCampaign, filterCampaigns, top12, stats, claim };

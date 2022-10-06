@@ -22,6 +22,7 @@ export default function Campaign(props) {
     const [campaignTarget, setCampaignTarget] = useState(0);
     const [campaignEndingDate, setCampaignEndingDate] = useState(dayjs(new Date()));
     const [campaignDescription, setCampaignDescription] = useState("");
+    const [campaignState, setCampaignState] = useState("");
     
     // New campaig
     
@@ -44,6 +45,7 @@ export default function Campaign(props) {
                     case 200:
                         setCampaign(res.data.data)
                         setCampaignDescription(res.data.data.description)
+                        setCampaignState(res.data.data.state)
                         campaignUpdated.owner = res.data.data.owner;
                         console.log(res.data.data)
                         break;
@@ -56,7 +58,7 @@ export default function Campaign(props) {
                 console.log(err);
             })
         })();
-    }, [editing, campaignTarget]);
+    }, [editing, campaignTarget, campaignState]);
 
     
 
@@ -95,6 +97,7 @@ export default function Campaign(props) {
                 campaign={campaign}
                 algoAddresses={props.algoAddresses}
                 algoSignerActive={props.algoSignerActive}
+                setCampaignState={setCampaignState}
             />
             
             <GridSpacer 
