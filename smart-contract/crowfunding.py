@@ -46,7 +46,7 @@ class Crowfunding(Application):
     #     )
     
     @external(authorize=Authorize.only(Global.creator_address()))
-    def setAll(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.String):
+    def setAll(self,db_id: abi.String, end_date: abi.Uint64,target: abi.Uint64,receiver: abi.Address):
         return Seq(
             self.db_id.set(db_id.get()),
             self.end_date.set(end_date.get()),

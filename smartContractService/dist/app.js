@@ -89,7 +89,7 @@ app.post('/api/v1/createCampaign', (req, res) => {
                 const setted = yield appClient.setAll({
                     db_id: id,
                     end_date: BigInt(endingDate),
-                    target: BigInt(target),
+                    target: BigInt(target * 1000000),
                     receiver: owner
                 });
                 res.status(201).json({

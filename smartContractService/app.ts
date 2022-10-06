@@ -130,7 +130,7 @@ app.post('/api/v1/createCampaign', (req: Request, res: Response) => {
         //     })
         // )
         res.status(200).json({
-            message: "Users refunded.",
+        message: "Users refunded.",
             data: null,
             error: null
         });

@@ -4,7 +4,7 @@ const { FieldValue, Timestamp } = require('firebase-admin/firestore');
 var fs = require('fs');
 const { dateFormatter, timeStampFromInt } = require('../utils/utils')
 const { pinFileToIPFS } = require('../services/pinata/pinata.js')
-const axios = require('axios');
+const axios = require('axios').default;
 const ApiData = require('../conf/smartContractService.json')
 
 const getAll = async (req, res) => {

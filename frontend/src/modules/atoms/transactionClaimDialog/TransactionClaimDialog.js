@@ -46,14 +46,13 @@ export default function TransactionClaimDialog(props) {
             'https://algosigner.api.purestake.io/testnet/algod',
             '',
             );
-            //let address = "RTJKUIUP3P6F6WEZFXQSJD7CNRQGTFUHBO5WK5LTTTD7BMTES54B7X52BU";
-            let appAddress = "WQIOFPOHGAKAZA57BYFQDOLOU5FABZFDB34QFUUDEGW5CD2CV7Y5HTYD7Y"; 
+            
             (async function () {
                 const appClient = new Crowfunding({
                   client: client,
                   signer: customSigner,
                   sender: address,
-                  appId: props.campaign.appId // Sostituire con props.campaign.appId 114347003
+                  appId: props.campaign.appId, // Sostituire con props.campaign.appId 114347003
                 });
               
                 // Call the method by name, with named and typed arguments
