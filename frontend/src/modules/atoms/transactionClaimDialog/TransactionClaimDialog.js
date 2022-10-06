@@ -94,7 +94,6 @@ export default function TransactionClaimDialog(props) {
                             case 200:
                                 props.handleCloseModal();
                                 props.setCampaignState("success")
-                                alert(res.data.message)
                                 break;
                             case 500:
                                 alert(res.data.message)
@@ -103,7 +102,6 @@ export default function TransactionClaimDialog(props) {
                     })
                     .catch(err2 => {
                         console.log(err2);
-                        alert(err2)
                     })
 
                     
@@ -112,8 +110,7 @@ export default function TransactionClaimDialog(props) {
                 
               })();
             
-
-        
+     
     }
 
     return(

@@ -97,7 +97,7 @@ export default function Campaign(props) {
                 campaign={campaign}
                 algoAddresses={props.algoAddresses}
                 algoSignerActive={props.algoSignerActive}
-                setCampaignState={props.setCampaignState}
+                setCampaignState={setCampaignState}
             />
             
             <GridSpacer 
