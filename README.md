@@ -5,7 +5,7 @@
 # Start Funding - Algorand Crowdfunding DApp
 # Team
 
-- Tomàs Daniel Avila Visintin | [GitHub](https://github.com/iltommi1995) | [LinkedIn](https://www.linkedin.com/in/alex-calabrese)
+- Tomàs Daniel Avila Visintin | [GitHub](https://github.com/iltommi1995) | [LinkedIn](https://www.linkedin.com/in/tom%C3%A0s-daniel-avila-visintin-2b5497170/)
 - Alex Calabrese | [GitHub](https://github.com/alexcalabrese) | [LinkedIn](https://www.linkedin.com/in/alex-calabrese)
 
 # Description
