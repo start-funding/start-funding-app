@@ -1,15 +1,22 @@
-# Start Funding app
-### The Algorand crowdfunding platform
-by [Tomàs Daniel Avila Visintin](https://github.com/iltommi1995) and [Alex Calabrese](https://github.com/alexcalabrese)
-<div>
-  <img src="https://gateway.pinata.cloud/ipfs/QmaqGvUyRvvijp78dqiBEc66ZcepGhd2CKDsNhUr2gAh3i" height="200px" />
-</div>
+
+<img align="center" src="https://gateway.pinata.cloud/ipfs/QmaqGvUyRvvijp78dqiBEc66ZcepGhd2CKDsNhUr2gAh3i" height="100px"/>
+
+
+# Start Funding - Algorand Crowdfunding DApp
+# Team
+
+- Tomàs Daniel Avila Visintin | [GitHub](https://github.com/iltommi1995) | [LinkedIn](https://www.linkedin.com/in/alex-calabrese)
+- Alex Calabrese | [GitHub](https://github.com/alexcalabrese) | [LinkedIn](https://www.linkedin.com/in/alex-calabrese)
+
+# Description
 
 Start Funding app is the prototype for a decentralized crowdfunding platform, based on Algorand blockchain.
 Only some basic functions are currently available, but future developments will come. 
 This project could be very useful to devs trying to build DApps based on Algorand, especially the ones using [PyTeal](https://github.com/algorand/pyteal), [Beaker](https://github.com/algorand-devrel/beaker), [Beaker-ts](https://github.com/algorand-devrel/beaker-ts) and [AlgoSigner](https://github.com/PureStake/algosigner).
 
 Our objective was to develop a decentralized application, not only because of the use of smart contracts, but also from other points of view, for example the use of IPFS to avoid a centralized file system.
+
+![contribution gif](demo/contribution.gif)
 
 ## Infrastructure
 The application is made of 6 principal components
