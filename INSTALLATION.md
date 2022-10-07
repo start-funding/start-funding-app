@@ -1,8 +1,8 @@
 # ⚒ Installation
 
-1. Install or upgrade to the latest stable version of node and npm from: [Downloading and installing Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+1. Install or upgrade to the latest stable version of node and npm from [Downloading and installing Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-2. Verify the correct installation of Node and by running the following commands:
+2. Verify the correct installation of Node by running the following commands:
 
     ```bash
 
@@ -25,7 +25,7 @@
     git clone https://github.com/start-funding/start-funding-app.git
 
     ```
-4. Move inside directory:
+4. Move inside the directory:
 	```bash
 
     cd start-funding-app/
@@ -34,12 +34,12 @@
 5. Setup Cloud Firestore:
 	- You need first to create a **Firestore database**: [Create a Cloud Firestore database](https://firebase.google.com/docs/firestore/quickstart#create).
 	- Generate your **key**: [How to setup a Firebase service account](https://sharma-vikashkr.medium.com/firebase-how-to-setup-a-firebase-service-account-836a70bb6646).
-	- Move your json file to `backend/conf/` and rename it as `creds.json`, the complete path will be: `start-funding-app/backend/conf/creds.json`.
+	- Move your JSON file to `backend/conf/` and rename it as `creds.json`, the complete path will be: `start-funding-app/backend/conf/creds.json`.
 	- Back to your Firestore Database.
-	- Create following collections:
+	- Create the following collections:
 		- Collection ID: "**campaigns**"*;
 		- Collection ID: "**stats**":
-			- Add document with following parameters:
+			- Add a document with the following parameters:
 				1. Document ID: **"homestats"**;
 				2. Field name: **"foundsCollected"**, Type: **"number"**, Value: **0**;
 				3. Field name: **"successfulCampaigns"**, Type: **"number"**, Value: **0**;
@@ -64,7 +64,7 @@
     cd ..
     cd smartContractService/
     npm install
-    npm run dev # wait until compilation is done
+    npm run dev # wait until the compilation is done
     ctrl + c # quit compiler 
     npm start
     ```
