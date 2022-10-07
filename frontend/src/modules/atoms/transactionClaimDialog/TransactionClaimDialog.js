@@ -40,6 +40,7 @@ export default function TransactionClaimDialog(props) {
             alert("Not valid address. Address needs to be a 58 chars long string.")
             return;
         }
+        props.setShowLoader(true)
 
         let client = new algosdk.Algodv2(
             {},
@@ -71,15 +72,20 @@ export default function TransactionClaimDialog(props) {
                                 props.handleCloseModal();
 
                                 props.setCampaignState("success")
-                                alert(res.data.message)
+                                props.setShowLoader(false)
+
                                 break;
                             case 500:
+                                props.setShowLoader(false)
                                 alert(res.data.message)
+
                                 break;
                         }                    
                     })
                     .catch(err => {
                         console.log(err);
+                        props.setShowLoader(false)
+
                         alert(err)
                     })
 
@@ -92,15 +98,21 @@ export default function TransactionClaimDialog(props) {
                     .then(res => {
                         switch(res.status) {
                             case 200:
+                                props.setShowLoader(false)
+
                                 props.handleCloseModal();
                                 props.setCampaignState("success")
                                 break;
                             case 500:
+                                props.setShowLoader(false)
+
                                 alert(res.data.message)
                                 break;
                         }                    
                     })
                     .catch(err2 => {
+                        props.setShowLoader(false)
+
                         console.log(err2);
                     })
 

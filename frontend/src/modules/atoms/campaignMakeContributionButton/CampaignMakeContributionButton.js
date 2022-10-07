@@ -26,6 +26,7 @@ export default function CampaignMakeContributionButton(props) {
                 buttonText={"Create transaction"}
                 campaign={props.campaign}
                 setCampaignTarget={props.setCampaignTarget}
+                setShowLoader={props.setShowLoader}
             />
         </div>
     )
