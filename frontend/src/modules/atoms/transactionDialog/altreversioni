@@ -1,0 +1,86 @@
+window.AlgoSigner.algod({
+            ledger: 'TestNet',
+            path: '/v2/transactions/params'
+        })
+        .then(txParams => {
+            /*
+            fee - integer fee per byte, in microAlgos. for a flat fee, set flatFee to true
+            * flatFee - bool optionally set this to true to specify fee as microalgos-per-txn
+            *       If true, txn fee may fall below the ALGORAND_MIN_TX_FEE
+            * firstRound - integer first protocol round on which this txn is valid
+            * lastRound - integer last protocol round on which this txn is valid
+            * genesisHash - string specifies hash genesis block of network in use
+            * genesisID - string specifies genesis ID of network in use
+            * 
+            * */
+            let params = {
+                flatFee: true,
+                firstRound: txParams['last-round'] +1,
+                lastRound: txParams['last-round'] +20,
+                genesisHash: txParams['genesis-hash'],
+                genesisID: txParams['genesis-id'],
+                fee: 1000
+            }
+
+            const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+                from: address,
+                to: "K7GGQIBN4DQKOTKDKV2663VQLTZ6ZSPZOP5JQBHC4TNABUSV7JWPN7TFGY",
+                amount: +amount * 1000000,
+                //note: "prova note",
+                suggestedParams: {...params}
+            });
+            console.log(txn)
+            /*
+            const txn2 = algosdk.makeApplicationNoOpTxnFromObject({
+                from: address,
+                appIndex: //,
+                suggestedParams: {...params}
+            })
+            */
+            
+            // Use the AlgoSigner encoding library to make the transactions base64
+            let txn_b64 = window.AlgoSigner.encoding.msgpackToBase64(txn.toByte());
+            let account1_mnemonic = "agent fee energy clog license rabbit all milk puzzle select pill scrap hidden sock gate donate innocent smooth charge absorb slight reduce burden able width"
+            const signer = algosdk.makeBasicAccountTransactionSigner(algosdk.mnemonicToSecretKey(account1_mnemonic))
+            console.log(signer)
+            console.log("Signer")
+            window.AlgoSigner.signTxn([{txn:txn_b64}])
+            .then(d => {
+                console.log(d)
+                window.AlgoSigner.send({
+                    ledger: 'TestNet',
+                    tx: d[0].blob
+                  })
+                  .then(d => {
+                    //alert(`Created transaction with id: ${d.txId}`)
+
+                    axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
+                        addressFrom: address,
+                        amount: amount
+                    })
+                    .then(res => {
+                        switch(res.status) {
+                            case 200:
+                                props.handleCloseModal()
+                            
+                                props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
+                                alert(res.data.message)
+                                break;
+                            case 500:
+                                alert(res.data.message)
+                                break;
+                        }                    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert(err)
+                    })
+                })
+                  .catch(e => console.error(e));
+            })
+            .catch(e => console.error(e));
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })

@@ -65,7 +65,7 @@ export default function TransactionCreateCampaignDialog(props) {
 
             const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
                 from: address,
-                to: "K7GGQIBN4DQKOTKDKV2663VQLTZ6ZSPZOP5JQBHC4TNABUSV7JWPN7TFGY",
+                to: Conf.startfundingAddress,
                 amount: + (props.newCampaign.target / 100 * 1) * 1000000,
                 //note: "prova note",
                 suggestedParams: {...params}

@@ -7,6 +7,7 @@ import CampaignEndingDateInput from "../../atoms/campaignEndingDateInput/Campaig
 
 import algosdk from "algosdk";
 import CampaignMakeContributionButton from "../../atoms/campaignMakeContributionButton/CampaignMakeContributionButton";
+import CampaignClaimButton from "../../atoms/campaignClaimButton/CampaignClaimButton";
 
 
 export default function CampaignImageAndDataSection(props) {    
@@ -140,8 +141,8 @@ export default function CampaignImageAndDataSection(props) {
                             props.createCampaignPage ?
                                 <span></span>
                             :
-                            /*|| props.algoAddresses.includes(props.campaign.owner)*/
-                                props.editing  || props.campaign.state != "active" || !props.algoSignerActive ?
+                            /*|| */
+                            props.algoAddresses.includes(props.campaign.owner) || props.editing  || props.campaign.state != "active" || !props.algoSignerActive ?
                                     <span></span>
                                 :
                                 <CampaignMakeContributionButton 
@@ -150,8 +151,22 @@ export default function CampaignImageAndDataSection(props) {
                                     setCampaignTarget={props.setCampaignTarget}
                                 />
                         }
+                        {
+                            props.createCampaignPage ?
+                            <span></span>
+                            :
+                            props.algoAddresses.includes(props.campaign.owner) && !props.editing  && props.campaign.state === "active" && props.algoSignerActive && props.campaign.collectedFunds >= props.campaign.target  ?
+                                <CampaignClaimButton 
+                                    algoAddresses={props.algoAddresses} 
+                                    campaign={props.campaign}
+                                    setCampaignState={props.setCampaignState}
+                                />
+                                :
+                                <span></span>
+                        }
                 </Card>
             </Grid>
+            
         </Grid>
     )
 }

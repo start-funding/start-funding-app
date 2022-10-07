@@ -10,7 +10,9 @@
             "fundCampaign": "campaign",
             "filterCampaigns": "filterCampaigns",
             "top12": "top12",
-            "stats": "stats"
+            "stats": "stats",
+            "claim": "claim"
         }
-    }
+    },
+    "startfundingAddress": "SV5TEX4THH4HC7ROS6D5PAU4FCONL333DCKSDDEZQPDVLF45VYZUU4HTS4"
 }
