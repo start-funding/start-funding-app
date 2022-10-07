@@ -55,4 +55,4 @@ In the future it would be appropriate to find a more decentralized solution, lik
 For the smart contracts, we decided to not use TEAL, but instead a Python library: PyTeal, with Beaker a specific framework for smart contracts development.
 
 
-## Installation guide
+### **[Installation guide](/INSTALLATION.md)**
