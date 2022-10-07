@@ -56,7 +56,6 @@ export default function SaveCampaignButton(props) {
                     formData.append('owner', props.campaign.owner)                    
 
                     // Axios post call
-                    
                     axios.put(`${api}${Conf.backend.endpoints.updateCampaign}/${props.campaign.id}`, formData)
                     .then(res => {
                         switch(res.status) {
@@ -143,6 +142,7 @@ export default function SaveCampaignButton(props) {
                 handleCloseModal={handleCloseTransactionModal}
                 text={`Confirm the campaign creation. You will be charged of 1% of the target.`}
                 buttonText={"Create campaign"}
+                setShowLoader={props.setShowLoader}
             />
         </div>
     )

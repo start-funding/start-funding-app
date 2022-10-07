@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, cardHeaderClasses, FormControl, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
 import algosdk from "algosdk";
 import axios from "axios";
 import React, { useState } from "react";
@@ -52,6 +52,7 @@ export default function TransactionDialog(props) {
             return;
         }
 
+        props.setShowLoader(true)
         let client = new algosdk.Algodv2(
             {},
             'https://algosigner.api.purestake.io/testnet/algod',
@@ -59,51 +60,68 @@ export default function TransactionDialog(props) {
         );
 
         (async function () {
-            const appClient = new Crowfunding({
-                client: client,
-                signer: customSigner,
-                sender: address,
-                appId: props.campaign.appId
-            });
 
-            // Call the method by name, with named and typed arguments
-            //const result = await appClient.get_collected();
-
-            const bootstrapResult = await appClient.donate({
-                donation: algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-                    from: address,
-                    to: props.campaign.appAddress,
-                    suggestedParams: await appClient.getSuggestedParams(),
-                    amount: amount * 1000000,
+            try {
+                const appClient = new Crowfunding({
+                    client: client,
+                    signer: customSigner,
+                    sender: address,
+                    appId: props.campaign.appId
+                });
+    
+                // Call the method by name, with named and typed arguments
+                //const result = await appClient.get_collected();
+    
+                const bootstrapResult = await appClient.donate({
+                    donation: algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+                        from: address,
+                        to: props.campaign.appAddress,
+                        suggestedParams: await appClient.getSuggestedParams(),
+                        amount: amount * 1000000,
+                    })
+                });
+                // Get a typed result back from our app call
+                console.log(bootstrapResult);
+    
+    
+                // Ci vorrebbe un controllo, ma su quale campo?
+                axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
+                    addressFrom: address,
+                    amount: amount
                 })
-            });
-            // Get a typed result back from our app call
-            console.log(bootstrapResult);
+                    .then(res => {
+                        switch (res.status) {
+                            case 200:
+                                props.setShowLoader(false)
+    
+                                props.handleCloseModal()
+    
+                                props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
+                                alert(res.data.message)
+                                break;
+                            case 500:
+                                props.setShowLoader(false)
+    
+                                alert(res.data.message)
+                                break;
+                        }
+                    })
+                    .catch(err => {
+                        props.setShowLoader(false)
+    
+                        console.log(err);
+                        alert(err)
+                    })
+            } catch(err1) {
+                props.setShowLoader(false)
 
-
-            // Ci vorrebbe un controllo, ma su quale campo?
-            axios.post(`${api}${Conf.backend.endpoints.fundCampaign}/${props.campaign.id}`, {
-                addressFrom: address,
-                amount: amount
-            })
-                .then(res => {
-                    switch (res.status) {
-                        case 200:
-                            props.handleCloseModal()
-
-                            props.setCampaignTarget(parseInt(res.data.data.collectedFunds))
-                            alert(res.data.message)
-                            break;
-                        case 500:
-                            alert(res.data.message)
-                            break;
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    alert(err)
-                })
-        })();
+                console.log(err1)
+                alert(err1.message != null || err1.message != "" ? err1.message : err1);
+            }
+            
+        }
+        
+        )();
 
 
 

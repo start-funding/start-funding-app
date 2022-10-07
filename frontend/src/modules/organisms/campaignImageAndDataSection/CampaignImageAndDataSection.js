@@ -149,6 +149,7 @@ export default function CampaignImageAndDataSection(props) {
                                     algoAddresses={props.algoAddresses} 
                                     campaign={props.campaign}
                                     setCampaignTarget={props.setCampaignTarget}
+                                    setShowLoader={props.setShowLoader}
                                 />
                         }
                         {
@@ -160,6 +161,7 @@ export default function CampaignImageAndDataSection(props) {
                                     algoAddresses={props.algoAddresses} 
                                     campaign={props.campaign}
                                     setCampaignState={props.setCampaignState}
+                                    setShowLoader={props.setShowLoader}
                                 />
                                 :
                                 <span></span>

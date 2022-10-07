@@ -30,14 +30,11 @@ def demo():
     app_id, app_addr, txid = app_client.create()
     print(f"- Created App with id: {app_id} and address addr: {app_addr}")
     
-    new_account = accounts.pop()
-    new_app_client = app_client.prepare(signer=new_account.signer)
-    
     result = app_client.call(Crowfunding.setAll, 
         db_id="hello",
         end_date=1674601223,
         target=8,
-        receiver= new_account.address)
+        receiver= account.address)
     
     print(f"- Setted all values")
     

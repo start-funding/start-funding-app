@@ -27,6 +27,8 @@ export default function CampaignClaimButton(props) {
                  buttonText={"Claim funds"}
                  campaign={props.campaign}
                  setCampaignState={props.setCampaignState}
+                 setShowLoader={props.setShowLoader}
+
             />
         </div>
     )

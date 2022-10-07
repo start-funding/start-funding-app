@@ -38,7 +38,7 @@ export default function TransactionCreateCampaignDialog(props) {
             alert("Not valid address. Address needs to be a 58 chars long string.")
             return;
         }   
-
+        props.setShowLoader(true)
         window.AlgoSigner.algod({
             ledger: 'TestNet',
             path: '/v2/transactions/params'
@@ -96,24 +96,38 @@ export default function TransactionCreateCampaignDialog(props) {
                         .then(res => {
                             switch(res.status) {
                                 case 201:
+                                    props.setShowLoader(false)
                                     props.handleCloseModal()
                                     navigate(`/campaign/${res.data.data.id}`)
                                     break;
                                 case 500:
+                                    props.setShowLoader(false)
+
                                     alert("Error in campaign creation.")
                                     break;
                             }
                         })
                         .catch(err => {
+                            props.setShowLoader(false)
+
                             console.log(err);
                         })
                     })
-                  .catch(e => console.error(e));
+                  .catch(e => {
+                    console.error(e);
+                    props.setShowLoader(false)
+
+                });
             })
-            .catch(e => console.error(e));
+            .catch(e => {
+                props.setShowLoader(false)
+                console.error(e)}
+            );
             
         })
         .catch(err => {
+            props.setShowLoader(false)
+
             console.log(err)
         })
     }
