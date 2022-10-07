@@ -10,6 +10,7 @@ import CampaignDescriptionSection from "../../organisms/campaignDescriptionSecti
 import Conf from '../../../conf/conf.json';
 import axios from "axios";
 import { Card, Grid, Typography } from "@mui/material";
+import Loader from "../../atoms/loader/Loader";
 
 
 let api = `http://${Conf.backend.ip}:${Conf.backend.port}/${Conf.backend.basePath}`;
@@ -23,6 +24,8 @@ export default function Campaign(props) {
     const [campaignEndingDate, setCampaignEndingDate] = useState(dayjs(new Date()));
     const [campaignDescription, setCampaignDescription] = useState("");
     const [campaignState, setCampaignState] = useState("");
+
+    const [showLoader, setShowLoader] = useState(false);
     
     // New campaig
     
@@ -98,6 +101,7 @@ export default function Campaign(props) {
                 algoAddresses={props.algoAddresses}
                 algoSignerActive={props.algoSignerActive}
                 setCampaignState={setCampaignState}
+                setShowLoader={setShowLoader}
             />
             
             <GridSpacer 
@@ -157,6 +161,8 @@ export default function Campaign(props) {
             <GridSpacer 
                 height="10vh" 
             />
+            <Loader show={showLoader} />
+
         </div>
     )
 }

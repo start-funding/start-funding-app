@@ -5,6 +5,7 @@ import CampaignTopButtonsBar from "../../organisms/campaignTopButtonsBar/Campaig
 import CampaignDescriptionSection from "../../organisms/campaignDescriptionSection/CampaignDescriptionSection";
 import CampaignImageAndDataSection from "../../organisms/campaignImageAndDataSection/CampaignImageAndDataSection";
 import './createCampaign.scss'
+import Loader from "../../atoms/loader/Loader";
 
 export default function CreateCampaign(props) {
 
@@ -14,6 +15,7 @@ export default function CreateCampaign(props) {
     const [campaignTarget, setCampaignTarget] = useState(0);
     const [campaignEndingDate, setCampaignEndingDate] = useState(dayjs(new Date()));
     const [campaignDescription, setCampaignDescription] = useState("");
+    const [showLoader, setShowLoader] = useState(false);
 
     // New campaign
     let campaign = {
@@ -36,6 +38,7 @@ export default function CreateCampaign(props) {
                 createCampaignPage={true}
                 updateNavActive={props.updateNavActive}
                 algoAddresses={props.algoAddresses}
+                setShowLoader={setShowLoader}
             />
             <GridSpacer 
                 height="5vh" 
@@ -66,6 +69,8 @@ export default function CreateCampaign(props) {
             <GridSpacer 
                 height="10vh" 
             />
+            <Loader show={showLoader} />
+
         </div>
     )
 }

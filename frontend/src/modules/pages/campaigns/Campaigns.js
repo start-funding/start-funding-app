@@ -18,7 +18,7 @@ export default function Campaigns(props) {
 
     // Pagination
     const [pageNumber, setPageNumber] = useState(1);
-    const [resultsPerPage, setResultsPerPage] = useState(1);
+    const [resultsPerPage, setResultsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState();
     const [totalResults, setTotalResults] = useState(0);
 

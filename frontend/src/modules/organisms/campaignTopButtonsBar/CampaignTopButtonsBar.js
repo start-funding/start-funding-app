@@ -20,7 +20,7 @@ export default function CampaignTopButtonsBar(props) {
                     <ArrowBackButton updateNavActive={props.updateNavActive}/>
 
                     {/* Save button */}
-                    <SaveCampaignButton campaign={props.campaignToSave} update={false} setEditing={props.setEditing} algoAddresses={props.algoAddresses}/>
+                    <SaveCampaignButton campaign={props.campaignToSave} update={false} setEditing={props.setEditing} algoAddresses={props.algoAddresses} setShowLoader={props.setShowLoader}/>
                 </Grid>
             </Grid>
         )
@@ -37,7 +37,7 @@ export default function CampaignTopButtonsBar(props) {
                                 <Button variant="contained" component="label" onClick={handleCancel} className="cancelButton">
                                     Cancel
                                 </Button>
-                                <SaveCampaignButton campaign={props.campaignToSave} update={true} setEditing={props.setEditing} algoAddresses={props.algoAddresses}/>
+                                <SaveCampaignButton campaign={props.campaignToSave} update={true} setEditing={props.setEditing} algoAddresses={props.algoAddresses} setShowLoader={props.setShowLoader}/>
                             </div>
                         </Grid>
                     </Grid>
