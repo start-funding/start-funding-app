@@ -1,5 +1,5 @@
 
-<img align="center" src="https://gateway.pinata.cloud/ipfs/QmaqGvUyRvvijp78dqiBEc66ZcepGhd2CKDsNhUr2gAh3i" height="100px"/>
+<img align="center" src="demo/logo.png" height="100px"/>
 
 
 # Start Funding - Algorand Crowdfunding DApp
