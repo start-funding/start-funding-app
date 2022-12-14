@@ -1,5 +1,5 @@
 
-<img align="center" src="https://gateway.pinata.cloud/ipfs/QmaqGvUyRvvijp78dqiBEc66ZcepGhd2CKDsNhUr2gAh3i" height="100px"/>
+<img align="center" src="demo/logo.png" height="100px"/>
 
 
 # Start Funding - Algorand Crowdfunding DApp
@@ -8,13 +8,15 @@
 - Tomàs Daniel Avila Visintin | [GitHub](https://github.com/iltommi1995) | [LinkedIn](https://www.linkedin.com/in/tom%C3%A0s-daniel-avila-visintin-2b5497170/)
 - Alex Calabrese | [GitHub](https://github.com/alexcalabrese) | [LinkedIn](https://www.linkedin.com/in/alex-calabrese)
 
+# **[Installation guide](/INSTALLATION.md)**
+
 # Description
 
 Start Funding app is the prototype for a decentralized crowdfunding platform, based on Algorand blockchain.
 Only some basic functions are currently available, but future developments will come. 
 This project could be very useful to devs trying to build DApps based on Algorand, especially the ones using [PyTeal](https://github.com/algorand/pyteal), [Beaker](https://github.com/algorand-devrel/beaker), [Beaker-ts](https://github.com/algorand-devrel/beaker-ts) and [AlgoSigner](https://github.com/PureStake/algosigner).
 
-Our objective was to develop a decentralized application, not only because of the use of smart contracts, but also from other points of view, for example the use of IPFS to avoid a centralized file system.
+Our objective was to develop a decentralized application, not only because of the use of smart contracts, but also from other points of view, for example, the use of IPFS to avoid a centralized file system.
 
 ![contribution gif](demo/contribution.gif)
 
@@ -29,12 +31,12 @@ The application is made of 6 principal components
 
 
 #### Frontend
-For the frontend we decided to use React, due to the large number of already made components.
+For the frontend we decided to use React, due to a large number of already made components.
 We used Google's Material UI library, creating our own components when the Material UI's ones weren't enough.
 
-We opted for an atomic design approach to structure the project, dividing the components in categories (atoms, molecules, organisms and pages).
+We opted for an atomic design approach to structure the project, dividing the components into categories (atoms, molecules, organisms and pages).
 
-We have choosen to use AlgoSigner browser wallet, to interact with the smart contracts and let users make transactions. 
+We have chosen to use AlgoSigner browser wallet, to interact with the smart contracts and let users make transactions. 
 Unfortunately, AlgoSigner is only supported by Google Chrome, therefore, using other browsers, it's only possible to see the active campaigns, but it's impossible to create campaigns and make donations.
 We also used the Algorand javascript sdk.
 
@@ -61,5 +63,22 @@ In the future it would be appropriate to find a more decentralized solution, lik
 #### Smart contracts 
 For the smart contracts, we decided to not use TEAL, but instead a Python library: PyTeal, with Beaker a specific framework for smart contracts development.
 
+# Functions
 
-### **[Installation guide](/INSTALLATION.md)**
+## Home
+![home](demo/home.gif)
+
+## Create
+![create](demo/create.gif)
+
+## Edit
+![edit](demo/edit.gif)
+
+## Contribution
+![contribution](demo/contribution.gif)
+
+## Claim
+![claim](demo/claim.gif)
+
+## Filters
+![filters](demo/filters.gif)
